@@ -1,0 +1,15 @@
+// 1. Configurações iniciais
+@use 'bootstrap/scss/bootstrap';
+
+// 2. Suas customizações
+$primary: #2c3e50;
+$enable-rounded: false;
+
+// 3. Importe apenas o necessário
+// @use "bootstrap/scss/root";
+// @use "bootstrap/scss/reboot";
+// @use "bootstrap/scss/type";
+// @use "bootstrap/scss/containers";
+// @use "bootstrap/scss/grid";
+// @use "bootstrap/scss/utilities";
+// @use "bootstrap/scss/utilities/api";
