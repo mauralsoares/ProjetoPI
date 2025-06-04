@@ -1,3 +1,6 @@
+// DEV: http://localhost:5173/login
+// PROD: http://localhost:80/login
+
 // 📂 src/pages/Login.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -74,7 +77,7 @@ function Login() {
         </form>
 
         <p className="registo-link">
-          Não tens conta? <Link to="/Registo">Regista-te</Link>
+          Não tens conta? <Link to="/registo">Regista-te</Link>
         </p>
       </div>
     </div>

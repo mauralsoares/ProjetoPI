@@ -1,0 +1,115 @@
+# Comandos úteis para desenvolvimento e produção com Docker Compose
+
+---
+
+## FRONTEND
+
+### Desenvolvimento (hot reload, sem rebuilds)
+- Iniciar ambiente de desenvolvimento do frontend:
+  docker-compose up frontend-dev
+
+- Aceder no browser:
+  http://localhost:5173
+
+### Produção (build final, Nginx)
+- Build e iniciar ambiente de produção do frontend:
+  docker-compose up --build frontend
+
+- Aceder no browser:
+  http://localhost
+  (ou http://localhost:80)
+
+---
+
+## BACKEND
+
+### Desenvolvimento (hot reload, sem rebuilds)
+- Iniciar ambiente de desenvolvimento do backend:
+  docker-compose up backend-dev
+
+- Aceder à API (exemplo):
+  http://localhost:4000/api/...
+
+### Produção (build final)
+- Build e iniciar ambiente de produção do backend:
+  docker-compose up --build backend
+
+- Aceder à API (exemplo):
+  http://localhost:4000/api/...
+
+---
+
+## Diferenças de HTTP entre ambientes
+
+- **Frontend DEV:** http://localhost:5173
+- **Frontend PRODUÇÃO:** http://localhost ou http://localhost:80
+
+- **Backend DEV:** http://localhost:4000
+- **Backend PRODUÇÃO:** http://localhost:4000  
+  (ou, se ambos em Docker, podes usar http://backend:4000 dentro da rede Docker)
+
+---
+
+## Dicas
+
+- Edita o código à vontade em DEV, as alterações aparecem automaticamente (hot reload).
+- Só precisas rebuildar (`--build`) para testar produção ou atualizar imagens.
+- Usa proxy no Vite para `/api` se quiseres que o frontend DEV comunique facilmente com o backend DEV.
+
+```# Comandos úteis para desenvolvimento e produção com Docker Compose
+
+---
+
+## FRONTEND
+
+### Desenvolvimento (hot reload, sem rebuilds)
+- Iniciar ambiente de desenvolvimento do frontend:
+  docker-compose up frontend-dev
+
+- Aceder no browser:
+  http://localhost:5173
+
+### Produção (build final, Nginx)
+- Build e iniciar ambiente de produção do frontend:
+  docker-compose up --build frontend
+
+- Aceder no browser:
+  http://localhost
+  (ou http://localhost:80)
+
+---
+
+## BACKEND
+
+### Desenvolvimento (hot reload, sem rebuilds)
+- Iniciar ambiente de desenvolvimento do backend:
+  docker-compose up backend-dev
+
+- Aceder à API (exemplo):
+  http://localhost:4000/api/...
+
+### Produção (build final)
+- Build e iniciar ambiente de produção do backend:
+  docker-compose up --build backend
+
+- Aceder à API (exemplo):
+  http://localhost:4000/api/...
+
+---
+
+## Diferenças de HTTP entre ambientes
+
+- **Frontend DEV:** http://localhost:5173
+- **Frontend PRODUÇÃO:** http://localhost ou http://localhost:80
+
+- **Backend DEV:** http://localhost:4000
+- **Backend PRODUÇÃO:** http://localhost:4000  
+  (ou, se ambos em Docker, podes usar http://backend:4000 dentro da rede Docker)
+
+---
+
+## Dicas
+
+- Edita o código à vontade em DEV, as alterações aparecem automaticamente (hot reload).
+- Só precisas rebuildar (`--build`) para testar produção ou atualizar imagens.
+- Usa proxy no Vite para `/api` se quiseres que o frontend DEV comunique facilmente com o backend DEV.

@@ -21,5 +21,13 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
+  },
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    // Descomenta e ajusta o proxy se precisares de comunicar com o backend via /api
+    // proxy: {
+    //   '/api': 'http://backend:PORT'
+    // }
   }
 })

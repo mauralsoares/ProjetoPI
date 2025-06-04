@@ -1,7 +1,10 @@
+// DEV: http://localhost:5173/registo
+// PROD: http://localhost:80/registo
+
 // 📂 src/pages/Register.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../assets/css/Register.css";
+import "../assets/css/Registo.css";
 
 function Register() {
   const [username, setUsername] = useState("");

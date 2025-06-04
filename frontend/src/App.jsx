@@ -14,7 +14,8 @@ import './assets/css/styles.css';
 
 function AppContent() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login" || location.pathname === "/registo";
+  const path = location.pathname.toLowerCase(); // já está em minúsculas
+  const isLoginPage = path === "/login" || path === "/registo"; // usa 'path' aqui!
 
   return (
     <>
