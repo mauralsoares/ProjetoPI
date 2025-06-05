@@ -1,7 +1,7 @@
 
 /* 📂 src/assets/css/Register.css */
 
-.login-container {
+.registo-container {
   height: 100vh;
   background-image: url("https://fenix-mais.iscte-iul.pt/portalImage?resourceId=568499051167746");
   background-size: cover;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.login-card {
+.registo-card {
   background: rgba(255, 255, 255, 0.96);
   padding: 40px;
   border-radius: 12px;

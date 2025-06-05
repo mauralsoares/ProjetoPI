@@ -15,22 +15,33 @@ function Register() {
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
+ // Verifica se o utilizador já está autenticado
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess(false);
+    e.preventDefault(); // Previne o comportamento padrão do formulário
+    setError(""); // Limpa mensagens de erro anteriores
+    setSuccess(false); // Limpa mensagens de sucesso anteriores
 
     if (password !== confirmPassword) {
+      // Verifica se as palavras-passe não coincidem
       setError("As palavras-passe não coincidem.");
       return;
     }
+    // Se coicidirem, prossegue com o registo
 
-    try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: username, email, password }),
-      });
+
+    
+   try {
+    const res = await fetch("http://localhost:4000/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: username,
+        email,
+        password,
+        // type: "user" Default 
+        // createdAT: Date.now Default
+      }),
+    });
 
       const data = await res.json();
 
@@ -38,8 +49,10 @@ function Register() {
         localStorage.setItem("token", data.token);
         setSuccess(true);
         setTimeout(() => navigate("/home"), 1500);
+      } else if (data.error === "Email já está em uso") {
+        setError("Este email já está registado. Faça login ou contacte o suporte.");
       } else {
-        setError(data.message || "Erro ao registar utilizador.");
+        setError(data.message || data.error || "Erro ao registar utilizador.");
       }
     } catch (err) {
       setError("Erro de ligação ao servidor.");
@@ -47,8 +60,8 @@ function Register() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
+    <div className="registo-container">
+      <div className="registo-card">
         <h1>ISCTE APP</h1>
         <h2>Registo</h2>
 

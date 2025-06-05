@@ -19,24 +19,26 @@ function Login() {
     setSuccess(false);
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("http://localhost:4000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       });
 
       const data = await res.json();
 
       if (res.ok && data.token) {
-        // Guardar o token JWT no localStorage
         localStorage.setItem("token", data.token);
         setSuccess(true);
-        setTimeout(() => navigate("/home"), 1000);
+        setTimeout(() => navigate("/home"), 1500);
       } else {
-        setError(data.message || "Email ou palavra-passe incorretos.");
+        setError(data.message || data.error || "Credenciais inválidas.");
       }
     } catch (err) {
-      setError("Erro ao ligar ao servidor. Tenta novamente mais tarde.");
+      setError("Erro de ligação ao servidor.");
     }
   };
 
