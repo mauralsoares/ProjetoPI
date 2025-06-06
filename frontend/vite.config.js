@@ -26,8 +26,8 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
     // Descomenta e ajusta o proxy se precisares de comunicar com o backend via /api
-    // proxy: {
-    //   '/api': 'http://backend:PORT'
-    // }
+    proxy: {
+    '/api': 'http://localhost:4000' // Se estiveres a correr o backend localmente
+    }
   }
 })
