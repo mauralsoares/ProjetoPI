@@ -12,6 +12,7 @@ function Login() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,6 +66,7 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
+        <img src="/imagens/iscte_logo.jpg" alt="ISCTE Logo" className="logo" />
         <h1>ISCTE APP</h1>
         <h2>Login</h2>
 
@@ -82,7 +84,7 @@ function Login() {
           <label htmlFor="password">Palavra-passe</label>
           <div className="password-wrapper">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               className="password-input"
               placeholder="••••••••"
@@ -90,6 +92,13 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <span
+              type="button"
+              ClassName="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </span>
           </div>
 
           {error && <p className="error">{error}</p>}

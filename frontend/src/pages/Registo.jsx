@@ -14,6 +14,9 @@ function Register() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
  // Verifica se o utilizador já está autenticado
   const handleSubmit = async (e) => {
@@ -62,6 +65,7 @@ function Register() {
   return (
     <div className="login-container">
       <div className="login-card">
+        <img src="/imagens/iscte_logo.jpg" alt="ISCTE Logo" className="logo" />
         <h1>ISCTE APP</h1>
         <h2>Registo</h2>
 
@@ -88,24 +92,34 @@ function Register() {
 
           <label htmlFor="password">Palavra-passe</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-
+          <span
+              ClassName="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </span>
           <label htmlFor="confirm-password">Confirmar palavra-passe</label>
           <input
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             id="confirm-password"
             placeholder="••••••••"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-
+          <span
+              ClassName="toggle-password"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? "🙈" : "👁️"}
+            </span>
           {error && <p className="error">{error}</p>}
           {success && <p className="success">Conta criada com sucesso! A redirecionar...</p>}
 
