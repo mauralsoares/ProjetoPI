@@ -31,7 +31,7 @@ function Register() {
 
     
    try {
-    const res = await fetch("/api/auth/register", {
+    const res = await fetch('/api/auth/register', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -60,8 +60,8 @@ function Register() {
   };
 
   return (
-    <div className="registo-container">
-      <div className="registo-card">
+    <div className="login-container">
+      <div className="login-card">
         <h1>ISCTE APP</h1>
         <h2>Registo</h2>
 

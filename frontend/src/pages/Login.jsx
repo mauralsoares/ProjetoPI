@@ -18,18 +18,37 @@ function Login() {
     setError("");
     setSuccess(false);
 
+    // Log do que vai ser enviado
+    console.log("LOGIN REQUEST BODY:", { email, password });
+
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch('/api/auth/login', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include", // Para enviar cookies, se necessário
         body: JSON.stringify({
           email,
           password,
         }),
       });
 
-      const data = await res.json();
+      // Log dos headers e status da resposta
+      console.log("RESPONSE STATUS:", res.status);
+      console.log("RESPONSE HEADERS:", [...res.headers.entries()]);
 
+
+      // const data = await res.json();  
+      const text = await res.text();
+      let data;
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        console.error("Resposta inválida (não é JSON):", text);
+        data = { error: "Erro interno no servidor." };
+      }
+
+      console.log("RESPONSE BODY:", data); // Log do corpo da resposta
       if (res.ok && data.token) {
         localStorage.setItem("token", data.token);
         setSuccess(true);
@@ -39,6 +58,7 @@ function Login() {
       }
     } catch (err) {
       setError("Erro de ligação ao servidor.");
+      console.error("FETCH ERROR:", err);
     }
   };
 

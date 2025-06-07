@@ -5,7 +5,7 @@ import Forbidden from "../pages/Forbidden.jsx";
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
 
-  return ttoken ? children : <Forbidden />;
+  return token ? children : <Forbidden />;
 }
 
 export default PrivateRoute;
