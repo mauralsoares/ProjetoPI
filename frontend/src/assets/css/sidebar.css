@@ -30,17 +30,6 @@
   border-radius: 6px;
 }
 
-.logo-container {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.iscte-logo {
-    max-width: 80%;
-    height: auto;
-}
-
 .logout-container {
   position: absolute;
   bottom: 20px;

@@ -6,9 +6,6 @@ import { FaHome, FaCalendarAlt, FaFileAlt, FaUpload, FaMapMarkerAlt, FaGraduatio
 const Sidebar = () => {
     return(
         <nav className="sidebar">
-          <div className="logo-container">
-            <img src="/imagens/iscte_logo.jpg" alt="ISCTE Logo" className="iscte-logo" />
-          </div>
             <ul>
                 <li><FaHome/>Home</li>
                 <li><FaCalendarAlt/>Calendário</li>

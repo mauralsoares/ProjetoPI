@@ -9,7 +9,6 @@ import Perfil from './pages/Perfil.jsx';
 
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
-import Navbar from './components/Navbar.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 
 import './assets/css/styles.css';
@@ -22,7 +21,6 @@ function App() {
   return (
     <>
       {!isLoginPage && <Header />}
-      {!isLoginPage && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
