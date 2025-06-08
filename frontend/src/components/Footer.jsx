@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
+import styles from './Footer.module.css';
 
 const Footer = () => (
-  <footer className="bg-dark text-white py-4 mt-auto">
-    <div className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <h5>Contato</h5>
-          <p>email@exemplo.com</p>
-        </div>
-        <div className="col-md-6 text-md-end">
-          <p className="mb-0">&copy; {new Date().getFullYear()} Meu Site. Todos os direitos reservados.</p>
-        </div>
-      </div>
+  <footer className={styles.footer}>
+    <div className={styles.left}>
+      <div className={styles.title}>Iscte – Instituto Universitário de Lisboa</div>
+      <div>Avenida das Forças Armadas, 1649-026 Lisboa,
+        TEL +351 217 903 000,
+        geral@iscte.pt
+         </div>
+    </div>
+    <div className={styles.right}>
+      &copy; {new Date().getFullYear()} Meu Site. Todos os direitos reservados.
     </div>
   </footer>
 );
