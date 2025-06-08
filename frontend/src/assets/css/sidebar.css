@@ -1,0 +1,67 @@
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.sidebar ul{
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar li:hover {
+  background-color: #f0f0f0;
+  border-radius: 6px;
+}
+
+.logo-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.iscte-logo {
+    max-width: 80%;
+    height: auto;
+}
+
+.logout-container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+.logout-button{
+    width: 100%;
+    padding: 12px;
+    background-color: #003399;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.logout-button:hover{
+    background-color: #002580;
+}
+

@@ -1,23 +1,28 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import '../assets/css/sidebar.css';
+import { FaHome, FaCalendarAlt, FaFileAlt, FaUpload, FaMapMarkerAlt, FaGraduationCap, FaCreditCard } from 'react-icons/fa';
 
-const Sidebar = () => (
-  <aside className="col-md-3 col-lg-2 bg-light p-3">
-    <div className="sticky-top pt-3">
-      <h5 className="border-bottom pb-2">Menu</h5>
-      <ul className="nav flex-column">
-        <li className="nav-item">
-          <NavLink className="nav-link active" to="/">Dashboard</NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/perfil">Perfil</NavLink>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">Configurações</a>
-        </li>
-      </ul>
-    </div>
-  </aside>
-);
+
+const Sidebar = () => {
+    return(
+        <nav className="sidebar">
+          <div className="logo-container">
+            <img src="/imagens/iscte_logo.jpg" alt="ISCTE Logo" className="iscte-logo" />
+          </div>
+            <ul>
+                <li><FaHome/>Home</li>
+                <li><FaCalendarAlt/>Calendário</li>
+                <li><FaFileAlt/>Resumos</li>
+                <li><FaUpload/>Upload de Resumo</li>
+                <li><FaMapMarkerAlt/>Locais de Estudo</li>
+                <li><FaGraduationCap />Curso</li>
+                <li><FaCreditCard />Pagamentos</li>
+            </ul>
+            <div className="logout-container">
+              <button className="logout-button">Log Out</button>
+            </div>
+        </nav>
+    );
+};
 
 export default Sidebar;

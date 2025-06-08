@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
+import '../assets/css/Home.css'
+
 
 const Home = () => {
   const [userData, setUserData] = useState({
@@ -44,23 +46,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="d-flex flex-column min-vh-100">
-      <div className="container-fluid flex-grow-1">
-        <div className="row">
-          <Sidebar />
+    <div className="home-container">
+      <Sidebar/>
 
-          <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-3">
-            <section className="mb-5">
-              <h2>Seção Principal</h2>
-              <p>Conteúdo da seção principal aqui...</p>
-              <p className="text-danger">
-                Olá {userData.name || '...'}, seu email é {userData.email || '...'} e tens permissão de {userData.tipo || '...'}
-              </p>
-            </section>
+      <main className="main-content">
+        <section className="mb-5">
+          <h2>Seção Principal</h2>
+          <p>Conteúdo da seção principal aqui...</p>
+          <p className="text-danger">
+            Olá {userData.name || '...'}, seu email é {userData.email || '...'} e tens permissão de {userData.tipo || '...'}
+          </p>
+        </section>
 
-          </main>
-        </div>
-      </div>
+      </main>
     </div>
   );
 };
