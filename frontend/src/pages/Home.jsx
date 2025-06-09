@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../components/Sidebar';
 import '../assets/css/Home.css'
 
 
@@ -47,7 +46,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <Sidebar/>
 
       <main className="main-content">
         <section className="mb-5">
