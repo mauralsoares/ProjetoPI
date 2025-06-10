@@ -22,22 +22,31 @@ const locais = [
 const Mapa = () => {
   return (
     <div className="pagina-mapa">
-      <div className="container-mapa">
-        <h2 className="titulo-mapa">Locais de Estudo</h2>
-        <div className="linha-azul"></div>
-        <MapContainer center={[38.736946, -9.142685]} zoom={12} scrollWheelZoom={true} className="mapa">
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contribuidores'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {locais.map((local, i) => (
-            <Marker key={i} position={local.pos}>
-              <Popup>{local.nome}</Popup>
-            </Marker>
-          ))}
-        </MapContainer>
-      </div>
-    </div>
+  <div className="upload-resumo-header">
+    <h2>Locais de Estudo</h2>
+    <div className="linha-azul"></div>
+  </div>
+
+  <div className="upload-form mapa-wrapper">
+    <MapContainer
+      center={[38.736946, -9.142685]}
+      zoom={12}
+      scrollWheelZoom={true}
+      className="mapa"
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contribuidores'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {locais.map((local, i) => (
+        <Marker key={i} position={local.pos}>
+          <Popup>{local.nome}</Popup>
+        </Marker>
+      ))}
+    </MapContainer>
+  </div>
+</div>
+
   );
 };
 
