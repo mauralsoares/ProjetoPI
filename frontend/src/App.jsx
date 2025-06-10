@@ -6,6 +6,7 @@ import Login from './pages/Login.jsx';
 import Registo from './pages/Registo.jsx';
 import Home from './pages/Home.jsx';
 import Perfil from './pages/Perfil.jsx';
+import Resumos from './pages/Resumos.jsx';
 
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/home" element={<Layout><Home /></Layout>} />
           <Route path="/perfil" element={<Layout><PrivateRoute><Perfil /></PrivateRoute></Layout>} />
           <Route path="/" element={<Layout><Home /></Layout>} />
+          <Route path='/resumos'element={<Layout><Resumos /></Layout>}></Route>
         </Routes>
       </>
     );
