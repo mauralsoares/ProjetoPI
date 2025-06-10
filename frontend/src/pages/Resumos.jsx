@@ -13,7 +13,7 @@ const Resumos = () => {
     const token = localStorage.getItem("token")
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/lists/ucs")
+        axios.get("/api/lists/ucs")
             .then(res => {
                 setUcs(res.data);
                 console.log("UCs recebidas:", res.data);
@@ -46,7 +46,7 @@ const Resumos = () => {
     useEffect(() => {
         if (search.trim() === "") return;
         const token = localStorage.getItem("token");
-        axios.get(`http://localhost:4000/api/files/search?uc=${encodeURIComponent(search)}`, {
+        axios.get(`/api/files/search?uc=${encodeURIComponent(search)}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
