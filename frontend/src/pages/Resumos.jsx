@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../assets/css/Resumos.css";
 import axios from "axios";
+import ResumoCard from '../components/ResumoCard.jsx';
 
 const Resumos = () => {
     const[ucs, setUcs] = useState([]);
@@ -9,7 +10,7 @@ const Resumos = () => {
     const[filtered, setFiltered] = useState([]);
     const[showDropdown, setShowDropdown] = useState(false);
     const [resumos, setResumos] = useState([]);
-
+    const token = localStorage.getItem("token")
 
     useEffect(() => {
         axios.get("http://localhost:4000/api/lists/ucs")
@@ -21,6 +22,7 @@ const Resumos = () => {
         console.error("Erro ao buscar UCs:", err);
       });
     }, []);
+
 
     useEffect(() => {
         if (search.trim() === "") {
@@ -40,10 +42,16 @@ const Resumos = () => {
         setShowDropdown(false);
     }
 
+
     useEffect(() => {
         if (search.trim() === "") return;
-        axios.get(`http://localhost:4000/api/files/search?uc=${encodeURIComponent(search)}`)
-            .then(res => {
+        const token = localStorage.getItem("token");
+        axios.get(`http://localhost:4000/api/files/search?uc=${encodeURIComponent(search)}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(res => {
             setResumos(res.data.files);
             console.log("Resumos recebidos:", res.data.files);
         })
@@ -51,6 +59,29 @@ const Resumos = () => {
             console.error("Erro ao buscar resumos:", err);
         });
     }, [search]);
+
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+    
+        if (!token) {
+            console.warn("Token não encontrado. Utilizador pode não estar autenticado.");
+            return;
+        }
+
+         axios.get("http://localhost:4000/api/files", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(res => {
+            setResumos(res.data.files);
+            console.log("Resumos carregados (sem filtro):", res.data.files);
+        })
+        .catch(err => {
+            console.error("Erro ao carregar todos os resumos:", err);
+        });
+    }, []);
 
     return(
         <div className="resumos-container">

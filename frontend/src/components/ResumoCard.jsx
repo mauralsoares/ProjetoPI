@@ -1,6 +1,5 @@
 import React from "react";
-import "./ResumoCard.css";
-
+import "../assets/css/ResumoCard.css";
 const ResumoCard = ({resumo}) => {
     return(
         <div className="resumo-card">
