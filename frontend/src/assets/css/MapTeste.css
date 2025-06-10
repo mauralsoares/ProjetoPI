@@ -1,0 +1,44 @@
+.pagina-mapa {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Para centralizar verticalmente também */
+  box-sizing: border-box;
+}
+
+.container-mapa {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 950px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo-mapa {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #0033a0;
+  margin-bottom: 12px;
+}
+
+.linha-azul {
+  height: 3px;
+  width: 120px;
+  background-color: #0033a0;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.mapa {
+  height: 500px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}

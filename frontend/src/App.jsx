@@ -6,6 +6,8 @@ import Login from './pages/Login.jsx';
 import Registo from './pages/Registo.jsx';
 import Home from './pages/Home.jsx';
 import Perfil from './pages/Perfil.jsx';
+import Mapa from './pages/Mapa';
+
 import MapaTeste from './components/MapTest.jsx';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
@@ -24,7 +26,7 @@ function App() {
       <>
         {!isLoginPage && <Header />}
         {!isLoginPage && <Sidebar />}
-        <div style={{ marginLeft: '250px', paddingTop: '80px', paddingBottom: '70px' }}></div>
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -38,6 +40,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registo" element={<Registo />} />
           <Route path="/mapa-teste" element={<MapaTeste />} />
+          <Route path="/mapa" element={<Mapa />} />
 
         </Routes>
 
