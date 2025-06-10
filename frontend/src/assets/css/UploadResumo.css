@@ -1,0 +1,97 @@
+/* ==== Wrapper Geral ==== */
+.upload-resumo-wrapper {
+  margin-left: 250px; /* compensação da sidebar */
+  padding: 100px 40px 150px;
+  background-color: #f1ecec;
+  min-height: 100vh;
+}
+
+/* ==== Cabeçalho do Título ==== */
+.upload-resumo-header {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.upload-resumo-header h2 {
+  font-size: 50px;
+  color: #0033a0;
+}
+
+/* ==== Container do Formulário ==== */
+.upload-resumo-container {
+  padding: 0;
+}
+
+/* ==== Formulário ==== */
+.upload-form {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ==== Labels ==== */
+.upload-form label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* ==== Inputs e Selects ==== */
+.upload-form input,
+.upload-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ==== Botão de Envio ==== */
+.upload-form button {
+  display: block;
+  margin: 25px auto 0 auto; /* top: 25px, horizontal: auto, bottom: 0 */
+  width: 50%;
+  padding: 12px;
+  background-color: #0033a0;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+
+.upload-form button:hover {
+  background-color: #00207a;
+}
+.upload-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+/* ==== React Select Customizado ==== */
+.upload-form .react-select__control {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-shadow: none;
+}
+
+.upload-form .react-select__control:hover {
+  border-color: #aaa;
+}
+
+.upload-form .react-select__option--is-focused {
+  background-color: #f1f4ffcf !important;
+  color: black;
+}
