@@ -25,7 +25,6 @@ function App() {
       <>
         {!isLoginPage && <Header />}
         {!isLoginPage && <Sidebar />}
-        <div style={{ marginLeft: '250px', paddingTop: '80px', paddingBottom: '70px' }}></div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route

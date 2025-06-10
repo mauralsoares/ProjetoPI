@@ -1,8 +1,8 @@
 /* ==== Wrapper Geral ==== */
 .upload-resumo-wrapper {
   margin-left: 250px; /* compensação da sidebar */
-  padding: 0px 40px 60px;
-  background-color: #fff;
+  padding: 100px 40px 150px;
+  background-color: #f1ecec;
   min-height: 100vh;
 }
 
