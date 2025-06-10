@@ -11,7 +11,7 @@ const Footer = () => (
          </div>
     </div>
     <div className={styles.right}>
-      &copy; {new Date().getFullYear()} Meu Site. Todos os direitos reservados.
+      &copy; {new Date().getFullYear()}
     </div>
   </footer>
 );

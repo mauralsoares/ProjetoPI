@@ -11,35 +11,24 @@ import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
+import Layout from './components/layout.jsx';
 
 import './assets/css/styles.css';
 
 function App() {
   const location = useLocation();
   const path = location.pathname.toLowerCase();
-  const isLoginPage = path === "/login" || path === "/registo";
 
  
     return (
       <>
-        {!isLoginPage && <Header />}
-        {!isLoginPage && <Sidebar />}
-        <div style={{ marginLeft: '250px', paddingTop: '80px', paddingBottom: '70px' }}></div>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/perfil"
-            element={
-              <PrivateRoute>
-                <Perfil />
-              </PrivateRoute>
-            }
-          />
           <Route path="/login" element={<Login />} />
           <Route path="/registo" element={<Registo />} />
+          <Route path="/home" element={<Layout><Home /></Layout>} />
+          <Route path="/perfil" element={<Layout><PrivateRoute><Perfil /></PrivateRoute></Layout>} />
+          <Route path="/" element={<Layout><Home /></Layout>} />
         </Routes>
-
-        {!isLoginPage && <Footer />}
       </>
     );
 }
