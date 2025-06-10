@@ -80,3 +80,18 @@
   resize: vertical;
 }
 
+/* ==== React Select Customizado ==== */
+.upload-form .react-select__control {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-shadow: none;
+}
+
+.upload-form .react-select__control:hover {
+  border-color: #aaa;
+}
+
+.upload-form .react-select__option--is-focused {
+  background-color: #f1f4ffcf !important;
+  color: black;
+}

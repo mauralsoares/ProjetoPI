@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
+import axios from 'axios';
 import '../assets/css/UploadResumo.css';
 
 const UploadResumo = () => {
@@ -9,6 +11,18 @@ const UploadResumo = () => {
     file: null,
   });
 
+  const [cadeiras, setCadeiras] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:4000/api/lists/ucs')
+      .then(response => {
+        setCadeiras(response.data);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar cadeiras:', error);
+      });
+  }, []);
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData((prev) => ({
@@ -17,11 +31,23 @@ const UploadResumo = () => {
     }));
   };
 
+  const handleCadeiraChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      cadeira: selectedOption.value,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Dados enviados:', formData);
     // Aqui você pode usar fetch/Axios para enviar o formulário
   };
+
+  const cadeiraOptions = cadeiras.map(c => ({
+    value: c,
+    label: c,
+  }));
 
   return (
     <div className="upload-resumo-wrapper">
@@ -42,17 +68,12 @@ const UploadResumo = () => {
           />
 
           <label>Nome da Cadeira</label>
-          <select
-            name="cadeira"
-            value={formData.cadeira}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Escolha uma cadeira...</option>
-            <option value="Programação">Programação</option>
-            <option value="Bases de Dados">Bases de Dados</option>
-            <option value="Matemática">Matemática</option>
-          </select>
+          <Select
+            options={cadeiraOptions}
+            onChange={handleCadeiraChange}
+            classNamePrefix="react-select"
+            placeholder="Escolha uma cadeira..."
+          />
 
           <label>Descrição do Resumo</label>
           <textarea
