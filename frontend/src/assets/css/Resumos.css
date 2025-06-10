@@ -1,0 +1,56 @@
+.resumos-container {
+  position: relative;
+  padding: 110px 30px 30px 30px;
+  font-family: Arial, sans-serif;
+  background-color: whitesmoke;
+  margin-left: 250px;
+  min-height: calc(100vh - 70px); 
+}
+
+.resumos-container h1{
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.resumos-search {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.resumos-dropdown {
+  border: 1px solid white;
+  border-radius: 6px;
+  margin-top: 5px;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  display: block;
+  padding: 10px;
+  z-index: 9999;
+ 
+}
+
+.resumos-dropdown-items {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.resumos-dropdown-items:hover {
+  background-color: #f1f4ffcf;
+}
+
+.resumo-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
