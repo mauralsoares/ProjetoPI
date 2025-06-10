@@ -1,7 +1,7 @@
 /* ==== Wrapper Geral ==== */
 .upload-resumo-wrapper {
   margin-left: 250px; /* compensação da sidebar */
-  padding: 20px 40px 60px;
+  padding: 0px 40px 60px;
   background-color: #fff;
   min-height: 100vh;
 }
@@ -9,7 +9,7 @@
 /* ==== Cabeçalho do Título ==== */
 .upload-resumo-header {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-bottom: 30px;
 }
 
@@ -54,8 +54,8 @@
 
 /* ==== Botão de Envio ==== */
 .upload-form button {
-  align-items: center;
-  margin-top: 25px;
+  display: block;
+  margin: 25px auto 0 auto; /* top: 25px, horizontal: auto, bottom: 0 */
   width: 50%;
   padding: 12px;
   background-color: #0033a0;
@@ -66,6 +66,7 @@
   cursor: pointer;
   transition: background 0.2s ease-in-out;
 }
+
 
 .upload-form button:hover {
   background-color: #00207a;
