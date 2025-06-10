@@ -54,8 +54,9 @@
 
 /* ==== Botão de Envio ==== */
 .upload-form button {
+  align-items: center;
   margin-top: 25px;
-  width: 100%;
+  width: 50%;
   padding: 12px;
   background-color: #0033a0;
   color: white;
