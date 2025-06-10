@@ -1,0 +1,80 @@
+/* ==== Wrapper Geral ==== */
+.upload-resumo-wrapper {
+  margin-left: 250px; /* compensação da sidebar */
+  padding: 20px 40px 60px;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+/* ==== Cabeçalho do Título ==== */
+.upload-resumo-header {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.upload-resumo-header h2 {
+  font-size: 50px;
+  color: #0033a0;
+}
+
+/* ==== Container do Formulário ==== */
+.upload-resumo-container {
+  padding: 0;
+}
+
+/* ==== Formulário ==== */
+.upload-form {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ==== Labels ==== */
+.upload-form label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* ==== Inputs e Selects ==== */
+.upload-form input,
+.upload-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ==== Botão de Envio ==== */
+.upload-form button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  background-color: #0033a0;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.upload-form button:hover {
+  background-color: #00207a;
+}
+.upload-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
