@@ -19,7 +19,7 @@ const Sidebar = () => {
                 <li><Link to="/home" className="sidebar-link"><FaHome /> Home</Link></li>
                 <li><FaCalendarAlt/>Calendário</li>
                 <li><Link to="/resumos" className="sidebar-link"><FaFileAlt /> Resumos</Link></li>
-                <li><FaUpload/>Upload de Resumo</li>
+                <li><Link to="/uploadresumo" className="sidebar-link"><FaUpload /> Upload de Resumos</Link></li>
                 <li><FaMapMarkerAlt/>Locais de Estudo</li>
                 <li><FaGraduationCap />Curso</li>
                 <li><FaCreditCard />Pagamentos</li>
