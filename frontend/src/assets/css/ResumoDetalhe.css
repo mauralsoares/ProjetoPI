@@ -5,6 +5,8 @@
   background-color: whitesmoke;
   margin-left: 250px;
   min-height: calc(100vh - 70px); 
+  align-items: center;
+  text-align: center;
 }
 
 .resumo-detalhe h1 {
@@ -22,7 +24,6 @@
   padding: 10px;
   border-radius: 7px;
   text-decoration: none;
-  width: 20%;
 }
 
 .resumo-btn:hover {
