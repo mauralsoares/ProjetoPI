@@ -1,9 +1,23 @@
 import React, { useState, useRef } from "react";
 import "../assets/css/ResumoCard.css";
 
+const SUPPORTED_PREVIEW = [".pdf", ".png", ".jpg", ".jpeg", ".gif", ".webp"];
+
+function canPreview(resumo) {
+  // Preferencialmente usa o tipo/contentType se existir
+  if (resumo.contentType) {
+    return resumo.contentType.startsWith("image/") || resumo.contentType === "application/pdf";
+  }
+  // fallback para extensão do nome do ficheiro
+  return SUPPORTED_PREVIEW.some((ext) =>
+    (resumo.previewUrl || resumo.nomeFicheiro)?.toLowerCase().endsWith(ext)
+  );
+}
+
 const ResumoCard = ({ resumo }) => {
   const [showPreview, setShowPreview] = useState(false); // Detalhes (aparece logo)
   const [showFilePreview, setShowFilePreview] = useState(false); // Ficheiro (aparece após 3s)
+  const [previewError, setPreviewError] = useState(false); // para evitar que o browser tente fazer preview de ficheiros não suportados o que origina o download automatico do ficheiro (TM)
   const timerRef = useRef(null);
 
   const handleMouseEnter = () => {
@@ -16,6 +30,8 @@ const ResumoCard = ({ resumo }) => {
     setShowFilePreview(false);
     clearTimeout(timerRef.current);
   };
+
+  console.log("Preview filename:", resumo.previewUrl || resumo.nomeFicheiro);
 
   return (
     <div
@@ -34,7 +50,7 @@ const ResumoCard = ({ resumo }) => {
         target="_blank"
         rel="noreferrer"
       >
-        Download 
+        Download
       </a>
       {showPreview && (
         <div className="resumo-preview">
@@ -48,13 +64,26 @@ const ResumoCard = ({ resumo }) => {
           {showFilePreview && (
             <div className="file-preview">
               <strong>Pré-visualização do ficheiro:</strong>
-              <iframe
-                src={resumo.previewUrl}
-                width="300"
-                height="200"
-                style={{ border: "none", marginTop: "0.5rem" }}
-                title="Pré-visualização"
-              />
+              {canPreview(resumo) ? (
+                !previewError ? (
+                  <iframe
+                    src={resumo.previewUrl}
+                    width="300"
+                    height="200"
+                    style={{ border: "none", marginTop: "0.5rem" }}
+                    title="Pré-visualização"
+                    onError={() => setPreviewError(true)}
+                  />
+                ) : (
+                  <div style={{ color: "red", marginTop: "0.5rem" }}>
+                    Erro ao carregar pré-visualização do ficheiro.
+                  </div>
+                )
+              ) : (
+                <div style={{ color: "gray", marginTop: "0.5rem" }}>
+                  Pré-visualização não disponível para este tipo de ficheiro.
+                </div>
+              )}
             </div>
           )}
         </div>
