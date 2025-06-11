@@ -8,46 +8,116 @@ const UploadResumo = () => {
     nome: '',
     cadeira: '',
     descricao: '',
-    file: null,
+    curso: '',
+    tipo: '',
+    ficheiro: null,
   });
 
   const [cadeiras, setCadeiras] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const cursosComTipo = [
+    "Engenharia Informática (Licenciatura)",
+    "Gestão de Sistemas de Informação (Mestrado)",
+    "Psicologia (Doutoramento)",
+    "Outro curso qualquer (Licenciatura)",
+    "outro"
+  ];
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/lists/ucs')
-      .then(response => {
-        setCadeiras(response.data);
-      })
-      .catch(error => {
+    const fetchCadeiras = async () => {
+      try {
+        const res = await axios.get('http://localhost:4000/api/lists/ucs', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        });
+        setCadeiras(res.data);
+      } catch (error) {
         console.error('Erro ao buscar cadeiras:', error);
-      });
+      }
+    };
+
+    fetchCadeiras();
   }, []);
+
+  const getFileExtension = (filename) => {
+    const parts = filename.split('.');
+    return parts.length > 1 ? parts.pop().toLowerCase() : '';
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+    if (files) {
+      const file = files[0];
+      setFormData((prev) => ({
+        ...prev,
+        ficheiro: file,
+        tipo: getFileExtension(file.name)
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
-  const handleCadeiraChange = (selectedOption) => {
-    setFormData((prev) => ({
-      ...prev,
-      cadeira: selectedOption.value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Dados enviados:', formData);
-    // Aqui você pode usar fetch/Axios para enviar o formulário
+    setErrorMessage('');
+    setSuccessMessage('');
+    setIsSubmitting(true);
+
+    const { nome, cadeira, descricao, curso, tipo, ficheiro } = formData;
+
+    console.log('📤 Enviando:', { nome, cadeira, curso, tipo, descricao });
+
+    if (!cadeira || !curso || !tipo || !ficheiro) {
+      setErrorMessage("Preencha todos os campos obrigatórios.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const data = new FormData();
+    data.append('titulo', nome);
+    data.append('uc', cadeira);
+    data.append('descricao', descricao);
+    data.append('curso', curso);
+    data.append('tipo', tipo);
+    data.append('ficheiro', ficheiro);
+
+    try {
+      const res = await axios.post('http://localhost:4000/api/uploads', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+
+      console.log('✅ Upload bem-sucedido:', res.data);
+
+      setSuccessMessage('Resumo enviado com sucesso!');
+      setFormData({
+        nome: '',
+        cadeira: '',
+        descricao: '',
+        curso: '',
+        tipo: '',
+        ficheiro: null,
+      });
+    } catch (error) {
+      console.error('❌ Erro ao enviar:', error.response?.data || error.message);
+      setErrorMessage(error.response?.data?.erro || 'Erro ao enviar resumo. Verifique os dados.');
+    }
+
+    setIsSubmitting(false);
   };
 
-  const cadeiraOptions = cadeiras.map(c => ({
-    value: c,
-    label: c,
-  }));
+  const cadeiraOptions = cadeiras.map(c => ({ value: c, label: c }));
+  const cursoOptions = cursosComTipo.map(c => ({ value: c, label: c }));
 
   return (
     <div className="upload-resumo-wrapper">
@@ -70,12 +140,18 @@ const UploadResumo = () => {
           <label>Nome da Cadeira</label>
           <Select
             options={cadeiraOptions}
-            onChange={handleCadeiraChange}
-            classNamePrefix="react-select"
+            onChange={(opt) => setFormData((prev) => ({ ...prev, cadeira: opt.value }))}
             placeholder="Escolha uma cadeira..."
           />
 
-          <label>Descrição do Resumo</label>
+          <label>Curso</label>
+          <Select
+            options={cursoOptions}
+            onChange={(opt) => setFormData((prev) => ({ ...prev, curso: opt.value }))}
+            placeholder="Selecione o curso"
+          />
+
+          <label>Descrição</label>
           <textarea
             name="descricao"
             value={formData.descricao}
@@ -87,12 +163,17 @@ const UploadResumo = () => {
           <label>Adicionar Ficheiro</label>
           <input
             type="file"
-            name="file"
+            name="ficheiro"
             onChange={handleChange}
             required
           />
 
-          <button type="submit">Salvar</button>
+          {errorMessage && <p className="error">{errorMessage}</p>}
+          {successMessage && <p className="success">{successMessage}</p>}
+
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Enviando...' : 'Salvar'}
+          </button>
         </form>
       </div>
     </div>
