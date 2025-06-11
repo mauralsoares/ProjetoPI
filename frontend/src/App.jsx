@@ -13,6 +13,7 @@ import Footer from './components/Footer.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import Layout from './components/layout.jsx';
+import ResumoCard from './components/ResumoCard.jsx';
 
 import './assets/css/styles.css';
 

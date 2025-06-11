@@ -1,0 +1,41 @@
+.resumo-card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resumo-card h3 {
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  max-width: 100%;
+}
+
+.resumo-rating {
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+}
+
+.resumo-desc {
+  font-size: 14px;
+  color: black;
+  text-align: justify;
+}
+
+.resumo-btn {
+  background-color: #0D28C2;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: auto;
+}

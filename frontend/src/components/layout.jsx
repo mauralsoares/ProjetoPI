@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     <>
       <Header />
       <Sidebar />
-      <div style={{ marginLeft: '0px', paddingTop: '100px', paddingBottom: '20px' }}>
+      <div>
         {children}
       </div>
       <Footer />
