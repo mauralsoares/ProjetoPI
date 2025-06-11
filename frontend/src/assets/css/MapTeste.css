@@ -8,13 +8,13 @@
 }
 
 /* Cabeçalho do título - reutilizado */
-.upload-mapa-header {
+.mapa-header {
   text-align: center;
   margin-top: 0px;
   margin-bottom: 30px;
 }
 
-.upload-mapa-header h2 {
+.mapa-header h2 {
   font-size: 50px;
   color: #0033a0;
 }
