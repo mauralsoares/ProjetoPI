@@ -3,14 +3,15 @@
   background-color: #ffffff;
   border-right: 1px solid #ddd;
   padding: 20px;
-  top: 70px; 
-  bottom: 70px; 
-  left: 0;
   position: fixed;
+  top: 70px; /* assumindo que o header tem 70px de altura */
+  left: 0;
+  height: calc(100vh - 70px); /* ocupar toda a altura restante */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 
 .sidebar ul{
   list-style: none;

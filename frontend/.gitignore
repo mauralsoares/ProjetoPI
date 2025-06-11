@@ -1,0 +1,16 @@
+# Ignora node_modules para evitar conflitos locais
+node_modules/
+
+# Ignora .envs para proteção de variáveis sensíveis
+.env
+.env.*
+
+# Ignora ficheiros temporários do sistema e do editor
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Ignora cache e artefactos do Vite
+dist/
+.cache/
