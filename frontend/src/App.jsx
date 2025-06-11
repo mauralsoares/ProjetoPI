@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx';
 import Perfil from './pages/Perfil.jsx';
 import Resumos from './pages/Resumos.jsx';
 import UploadResumo from './pages/UploadResumo.jsx';
+import ResumoDetalhe from "./pages/ResumoDetalhe";
 
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path='/resumos'element={<Layout><Resumos /></Layout>}></Route>
           <Route path='/uploadresumo'element={<Layout><UploadResumo /></Layout>}></Route>
+          <Route path="/resumo/:id" element={<Layout><ResumoDetalhe /></Layout>} />
         </Routes>
       </>
     );

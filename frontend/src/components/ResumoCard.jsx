@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "../assets/css/ResumoCard.css";
+import {Link} from 'react-router-dom';
 
 const SUPPORTED_PREVIEW = [".pdf", ".png", ".jpg", ".jpeg", ".gif", ".webp"];
 
@@ -39,11 +40,13 @@ const ResumoCard = ({ resumo }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <h3>{resumo.titulo}</h3>
-      <div className="resumo-rating">
-        ⭐ {resumo.rating?.toFixed(1) || "0,0"} ({resumo.ratingCount || 0})
-      </div>
+      <Link to={`/resumo/${resumo.id}`} className="resumo-card-link" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <h3>{resumo.titulo}</h3>
+        <div className="resumo-rating">
+          ⭐ {resumo.rating?.toFixed(1) || "0,0"} ({resumo.ratingCount || 0})
+        </div>
       <p className="resumo-desc">{resumo.descricao}</p>
+      </Link>
       <a
         href={`/api/uploads/${resumo.id}`}
         className="resumo-btn"

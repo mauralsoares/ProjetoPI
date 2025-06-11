@@ -1,0 +1,15 @@
+.resumo-detalhe {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.resumo-btn {
+  margin-top: 1rem;
+  display: inline-block;
+  background: royalblue;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+}
