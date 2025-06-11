@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../assets/css/Resumos.css";
 import axios from "axios";
@@ -10,7 +10,9 @@ const Resumos = () => {
     const[filtered, setFiltered] = useState([]);
     const[showDropdown, setShowDropdown] = useState(false);
     const [resumos, setResumos] = useState([]);
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
+    const dropdownRef = useRef(null);
+    const inputRef = useRef(null);
 
     useEffect(() => {
         axios.get("/api/lists/ucs")
@@ -23,11 +25,26 @@ const Resumos = () => {
       });
     }, []);
 
-
     useEffect(() => {
+        const token = localStorage.getItem("token");
+
         if (search.trim() === "") {
             setFiltered([]);
             setShowDropdown(false);
+
+            axios.get("/api/files", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                setResumos(res.data.files);
+                console.log("Resumos restaurados:", res.data.files);
+            })
+            .catch(err => {
+                console.error("Erro ao restaurar resumos:", err);
+            });
+
         } else {
             const results = ucs.filter((uc) =>
                 String(uc).toLowerCase().includes(search.toLowerCase())
@@ -39,27 +56,29 @@ const Resumos = () => {
 
     const handleSelect = (uc) => {
         setSearch(uc);
+        setFiltered([]);
         setShowDropdown(false);
-    }
 
-
-    useEffect(() => {
-        if (search.trim() === "") return;
         const token = localStorage.getItem("token");
-        axios.get(`/api/files/search?uc=${encodeURIComponent(search)}`, {
+
+        axios.get("/api/files", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
         .then(res => {
-            setResumos(res.data.files);
-            console.log("Resumos recebidos:", res.data.files);
+            const todosResumos = res.data.files;
+            const filtrados = todosResumos.filter(file =>
+                file.uc?.toLowerCase().includes(uc.toLowerCase())
+            );
+
+            setResumos(filtrados);
+            console.log("Resumos filtrados localmente:", filtrados);
         })
         .catch(err => {
             console.error("Erro ao buscar resumos:", err);
         });
-    }, [search]);
-
+    };
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -83,10 +102,28 @@ const Resumos = () => {
         });
     }, []);
 
+    useEffect(() => {
+        function handleClickOutside(event){
+            if(
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                inputRef.current &&
+                !inputRef.current.contains(event.target)
+            ) {
+                setShowDropdown(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return(
         <div className="resumos-container">
             <h1>Fórum de Resumos</h1>
             <input
+                ref={inputRef}
                 type="text"
                 placeholder="Pesquisa uma cadeira..."
                 value={search}
@@ -95,7 +132,7 @@ const Resumos = () => {
                 className="resumos-search"
             />
             {showDropdown && filtered.length > 0 &&(
-                <div className="resumos-dropdown">
+                <div className="resumos-dropdown" ref={dropdownRef}>
                     {filtered.map((uc, index) => (
                         <div
                         key={index}

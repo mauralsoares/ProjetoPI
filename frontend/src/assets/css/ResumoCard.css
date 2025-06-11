@@ -10,19 +10,24 @@
   gap: 10px;
 }
 
-.resumo-autor {
-  font-weight: bold;
-  color: #555;
+.resumo-card h3 {
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  max-width: 100%;
 }
 
 .resumo-rating {
   font-size: 14px;
-  color: #777;
+  color: black;
+  font-weight: bold;
 }
 
 .resumo-desc {
   font-size: 14px;
-  color: #333;
+  color: black;
+  text-align: justify;
 }
 
 .resumo-btn {

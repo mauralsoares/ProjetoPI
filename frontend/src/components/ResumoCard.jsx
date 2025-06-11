@@ -24,7 +24,6 @@ const ResumoCard = ({ resumo }) => {
       onMouseLeave={handleMouseLeave}
     >
       <h3>{resumo.titulo}</h3>
-      <p className="resumo-autor">{resumo.ownerEmail}</p>
       <div className="resumo-rating">
         ⭐ {resumo.rating?.toFixed(1) || "0,0"} ({resumo.ratingCount || 0})
       </div>

@@ -14,12 +14,12 @@
 }
 
 .resumos-search {
-  width: 100%;
   padding: 10px;
-  margin: 15px 0;
+  margin: 15px 0px 0px 15px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  width: 97%;
 }
 
 .resumos-dropdown {
@@ -31,11 +31,11 @@
   max-height: 200px;
   overflow-y: auto;
   position: absolute;
-  width: 100%;
+  width: 90%;
   display: block;
   padding: 10px;
   z-index: 9999;
- 
+  margin: 15px 0px 0px 15px;
 }
 
 .resumos-dropdown-items {
