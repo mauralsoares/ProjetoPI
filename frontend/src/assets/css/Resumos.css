@@ -4,13 +4,14 @@
   font-family: Arial, sans-serif;
   background-color: whitesmoke;
   margin-left: 250px;
-  min-height: calc(100vh - 70px); 
+  min-height: calc(100vh - 70px);
 }
 
 .resumos-container h1{
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
+  
 }
 
 .resumos-search {
