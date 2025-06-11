@@ -22,10 +22,11 @@ const locais = [
 const Mapa = () => {
   return (
     <div className="pagina-mapa">
-  <div className="upload-resumo-header">
+  <div className="mapa-header">
     <h2>Locais de Estudo</h2>
-    <div className="linha-azul"></div>
+    <hr className="divider" />
   </div>
+
 
   <div className="upload-form mapa-wrapper">
     <MapContainer
