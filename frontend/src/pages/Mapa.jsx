@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import '../assets/css/MapTeste.css' // Mantém o CSS por enquanto
+import axios from 'axios';
+import '../assets/css/MapTeste.css';
 
-// Corrigir ícones do Leaflet no Vite
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -12,42 +12,59 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
 });
 
-const locais = [
-  { pos: [38.737, -9.153], nome: 'Estudo 1' },
-  { pos: [38.75, -9.2], nome: 'Estudo 2' },
-  { pos: [38.73, -9.17], nome: 'Estudo 3' },
-  { pos: [38.72, -9.14], nome: 'Estudo 4' },
-];
-
 const Mapa = () => {
+  const [locais, setLocais] = useState([]);
+
+  useEffect(() => {
+    const fetchLocais = async () => {
+      try {
+        const res = await axios.get('http://localhost:4000/api/studyspots');
+        console.log('📍 Locais recebidos do backend:', res.data);
+        setLocais(res.data);
+      } catch (err) {
+        console.error('Erro ao buscar locais de estudo:', err);
+      }
+    };
+
+    fetchLocais();
+  }, []);
+
   return (
     <div className="pagina-mapa">
-  <div className="mapa-header">
-    <h2>Locais de Estudo</h2>
-    <hr className="divider" />
-  </div>
+      <div className="mapa-header">
+        <h2>Locais de Estudo</h2>
+        <hr className="divider" />
+      </div>
 
+      <div className="upload-form mapa-wrapper">
+        <MapContainer
+          center={[38.736946, -9.142685]}
+          zoom={13}
+          scrollWheelZoom={true}
+          className="mapa"
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-  <div className="upload-form mapa-wrapper">
-    <MapContainer
-      center={[38.736946, -9.142685]}
-      zoom={12}
-      scrollWheelZoom={true}
-      className="mapa"
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contribuidores'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {locais.map((local, i) => (
-        <Marker key={i} position={local.pos}>
-          <Popup>{local.nome}</Popup>
-        </Marker>
-      ))}
-    </MapContainer>
-  </div>
-</div>
+          {locais.map((local, index) => {
+            const coords = local.localizacao?.coordinates;
+            if (!coords || coords.length !== 2) {
+              console.warn('⚠️ Local ignorado por dados inválidos:', local);
+              return null;
+            }
 
+            const [lng, lat] = coords;
+            return (
+              <Marker key={index} position={[lat, lng]}>
+                <Popup>{local.nome || 'Local sem nome'}</Popup>
+              </Marker>
+            );
+          })}
+        </MapContainer>
+      </div>
+    </div>
   );
 };
 
