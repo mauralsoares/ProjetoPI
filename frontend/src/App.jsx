@@ -25,28 +25,29 @@ function App() {
   const location = useLocation();
   const path = location.pathname.toLowerCase();
 
- 
-    return (
-      <>
-        {!isLoginPage && <Header />}
-        {!isLoginPage && <Sidebar />}
-        
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/registo" element={<Registo />} />
+  const isLoginPage = path === "/login" || path === "/registo"; // <-- ADICIONA ESTA LINHA
 
-          <Route path="/home" element={<Layout><Home /></Layout>} />
-          <Route path="/perfil" element={<Layout><PrivateRoute><Perfil /></PrivateRoute></Layout>} />
-          <Route path="/" element={<Layout><Home /></Layout>} />
-          <Route path='/resumos'element={<Layout><Resumos /></Layout>}></Route>
-          <Route path='/uploadresumo'element={<Layout><UploadResumo /></Layout>}></Route>
-          <Route path="/resumo/:id" element={<Layout><ResumoDetalhe /></Layout>} />
-          <Route path="/mapa-teste" element={<MapaTeste />} />
-          <Route path="/mapa" element={<Mapa />} />
+  return (
+    <>
+      {!isLoginPage && <Header />}
+      {!isLoginPage && <Sidebar />}
+      
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/registo" element={<Registo />} />
 
-        </Routes>
-      </>
-    );
+        <Route path="/home" element={<Layout><Home /></Layout>} />
+        <Route path="/perfil" element={<Layout><PrivateRoute><Perfil /></PrivateRoute></Layout>} />
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path='/resumos'element={<Layout><Resumos /></Layout>}></Route>
+        <Route path='/uploadresumo'element={<Layout><UploadResumo /></Layout>}></Route>
+        <Route path="/resumo/:id" element={<Layout><ResumoDetalhe /></Layout>} />
+        <Route path="/mapa-teste" element={<MapaTeste />} />
+        <Route path="/mapa" element={<Mapa />} />
+
+      </Routes>
+    </>
+  );
 }
 
 export default App;
