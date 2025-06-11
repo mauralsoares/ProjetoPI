@@ -7,6 +7,7 @@ import Registo from './pages/Registo.jsx';
 import Home from './pages/Home.jsx';
 import Perfil from './pages/Perfil.jsx';
 import Mapa from './pages/Mapa';
+import LocaisEstudo from './pages/LocaisEstudo';
 
 import MapaTeste from './components/MapTest.jsx';
 import Header from './components/Header.jsx';
@@ -41,6 +42,7 @@ function App() {
           <Route path="/registo" element={<Registo />} />
           <Route path="/mapa-teste" element={<MapaTeste />} />
           <Route path="/mapa" element={<Mapa />} />
+          <Route path="/locaisestudo" element={<LocaisEstudo />} />
 
         </Routes>
 
