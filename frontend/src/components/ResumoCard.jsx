@@ -1,28 +1,29 @@
 import React, { useState, useRef } from "react";
 import "../assets/css/ResumoCard.css";
+import { Link } from "react-router-dom";
 
 const SUPPORTED_PREVIEW = [".pdf", ".png", ".jpg", ".jpeg", ".gif", ".webp"];
 
 function canPreview(resumo) {
-  // Preferencialmente usa o tipo/contentType se existir
-  if (resumo.contentType) {
-    return resumo.contentType.startsWith("image/") || resumo.contentType === "application/pdf";
-  }
-  // fallback para extensão do nome do ficheiro
+  if (!resumo) return false;
+  const type = resumo.contentType || resumo.tipo || resumo.mimetype || "";
+  if (type.startsWith("image/") || type === "application/pdf") return true;
   return SUPPORTED_PREVIEW.some((ext) =>
-    (resumo.previewUrl || resumo.nomeFicheiro)?.toLowerCase().endsWith(ext)
+    (resumo.filename || resumo.nomeFicheiro || "").toLowerCase().endsWith(ext)
   );
 }
 
 const ResumoCard = ({ resumo }) => {
-  const [showPreview, setShowPreview] = useState(false); // Detalhes (aparece logo)
-  const [showFilePreview, setShowFilePreview] = useState(false); // Ficheiro (aparece após 3s)
-  const [previewError, setPreviewError] = useState(false); // para evitar que o browser tente fazer preview de ficheiros não suportados o que origina o download automatico do ficheiro (TM)
+  const [showPreview, setShowPreview] = useState(false);
+  const [showFilePreview, setShowFilePreview] = useState(false);
+  const [previewError, setPreviewError] = useState(false);
   const timerRef = useRef(null);
 
+  const resumoId = resumo._id || resumo.id;
+
   const handleMouseEnter = () => {
-    setShowPreview(true); // Mostra detalhes logo
-    timerRef.current = setTimeout(() => setShowFilePreview(true), 3000); // Mostra ficheiro após 3s
+    setShowPreview(true);
+    timerRef.current = setTimeout(() => setShowFilePreview(true), 3000);
   };
 
   const handleMouseLeave = () => {
@@ -31,21 +32,26 @@ const ResumoCard = ({ resumo }) => {
     clearTimeout(timerRef.current);
   };
 
-  console.log("Preview filename:", resumo.previewUrl || resumo.nomeFicheiro);
-
   return (
     <div
       className="resumo-card"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <h3>{resumo.titulo}</h3>
-      <div className="resumo-rating">
-        ⭐ {resumo.rating?.toFixed(1) || "0,0"} ({resumo.ratingCount || 0})
-      </div>
-      <p className="resumo-desc">{resumo.descricao}</p>
+      <Link
+        to={`/resumo/${resumoId}`}
+        state={{ resumo }}
+        className="resumo-card-link"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <h3>{resumo.titulo || "Sem título"}</h3>
+        <div className="resumo-rating">
+          ⭐ {resumo.rating?.toFixed(1) || "0,0"} ({resumo.ratingCount || 0})
+        </div>
+        <p className="resumo-desc">{resumo.descricao || "Sem descrição."}</p>
+      </Link>
       <a
-        href={`/api/uploads/${resumo.id}`}
+        href={`/api/uploads/${resumoId}`}
         className="resumo-btn"
         target="_blank"
         rel="noreferrer"
@@ -67,7 +73,7 @@ const ResumoCard = ({ resumo }) => {
               {canPreview(resumo) ? (
                 !previewError ? (
                   <iframe
-                    src={resumo.previewUrl}
+                    src={`/api/uploads/view/${resumoId}`}
                     width="300"
                     height="200"
                     style={{ border: "none", marginTop: "0.5rem" }}
