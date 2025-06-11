@@ -74,29 +74,29 @@ function ResumoDetalhe() {
     <div className="resumo-detalhe">
       <h1>{resumo.titulo || "Sem título"}</h1>
       <p>
-        <strong>Upload por:</strong> {resumo.ownerEmail || resumo.author || resumo.email || "Desconhecido"}
+        <strong>Upload por: </strong> {resumo.ownerEmail || resumo.author || resumo.email || "Desconhecido"}
       </p>
-      <p>{resumo.descricao || "Sem descrição."}</p>
+      <p><strong>Descrição: </strong>{resumo.descricao || "Sem descrição."}</p>
 
-      <p><strong>UC:</strong> {resumo.uc || "Não especificada"}</p>
-      <p><strong>Curso:</strong> {resumo.curso || "Não especificado"}</p>
-      <p><strong>Ano:</strong> {resumo.ano || "Não especificado"}</p>
+      <p><strong>UC: </strong> {resumo.uc || "Não especificada"}</p>
+      <p><strong>Curso: </strong> {resumo.curso || "Não especificado"}</p>
+      <p><strong>Ano: </strong> {resumo.ano || "Não especificado"}</p>
       <p>
-        <strong>Data de upload:</strong>{" "}
+        <strong>Data de upload: </strong>{" "}
         {resumo.createdAt || resumo.uploadedAt
           ? new Date(resumo.createdAt || resumo.uploadedAt).toLocaleDateString()
           : "Desconhecida"}
       </p>
       <p>
-        <strong>Tamanho do ficheiro:</strong>{" "}
+        <strong>Tamanho do ficheiro: </strong>{" "}
         {resumo.size ? (resumo.size / 1024).toFixed(2) + " KB" : "Desconhecido"}
       </p>
       <p>
-        <strong>Tipo de ficheiro:</strong>{" "}
+        <strong>Tipo de ficheiro: </strong>{" "}
         {resumo.contentType || resumo.tipo || resumo.mimetype || "Desconhecido"}
       </p>
       <p>
-        <strong>Nome do ficheiro:</strong>{" "}
+        <strong>Nome do ficheiro: </strong>{" "}
         {resumo.nomeFicheiro || resumo.filename || "Desconhecido"}
       </p>
 
