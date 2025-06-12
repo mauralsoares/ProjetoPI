@@ -46,6 +46,8 @@ function App() {
         <Route path="/resumo/:id" element={<Layout><ResumoDetalhe /></Layout>} />
         <Route path="/mapa-teste" element={<MapaTeste />} />
         <Route path="/mapa" element={<Mapa />} />
+        
+        <Route path="/locaisestudo" element={<LocaisEstudo/>} />
       </Routes>
     </>
   );

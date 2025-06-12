@@ -20,7 +20,7 @@ const Sidebar = () => {
                 <li><FaCalendarAlt/>Calendário</li>
                 <li><Link to="/resumos" className="sidebar-link"><FaFileAlt /> Resumos</Link></li>
                 <li><Link to="/uploadresumo" className="sidebar-link"><FaUpload /> Upload de Resumos</Link></li>
-                <li><FaMapMarkerAlt/>Locais de Estudo</li>
+                <li><Link to="/mapa" className="sidebar-link"><FaMapMarkerAlt /> Locais de Estudo</Link></li>
                 <li><FaGraduationCap />Curso</li>
                 <li><FaCreditCard />Pagamentos</li>
             </ul>
