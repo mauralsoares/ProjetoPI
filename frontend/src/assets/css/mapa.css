@@ -18,14 +18,7 @@
   color: #0033a0;
 }
 
-/* Linha decorativa opcional */
-.linha-azul {
-  height: 3px;
-  width: 120px;
-  background-color: #0033a0;
-  margin: 0 auto 20px;
-  border-radius: 5px;
-}
+
 
 /* Wrapper layout em duas colunas ou bloco único */
 .mapa-wrapper {
@@ -126,4 +119,201 @@
   font-size: 14px;
   margin-bottom: 10px;
   text-align: center;
+}
+
+/* Ícones do mapa */
+.icon-usuario {
+  background-color: #0033a0;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon-usuario span {
+  color: white;
+  font-size: 20px;
+}
+
+.icon-local {
+  background-color: #eeff00;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon-local span {
+  color: #0033a0;
+  font-size: 20px;
+}
+
+/* Lista de locais ao lado do mapa */
+.lista-locais-lateral {
+  flex: 1;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  height: 550px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
+}
+
+.lista-locais-lateral h3 {
+  font-size: 20px;
+  color: #0033a0;
+  margin: 20px 0 10px;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.lista-itens.scrollável {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px;
+  margin: 0;
+  margin-bottom: 60px; /* espaço para botão */
+}
+.lista-itens {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.item-local {
+  background: #f9f9f9;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Botão fixo ao fundo da lista */
+.btn-fixado-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+.separador {
+  border: none;
+  border-top: 1px solid #919191;
+  margin: 8px 0;
+}
+
+.descricao-local {
+  font-style: italic;
+  color: #333;
+  font-size: 14px;
+}
+
+/* RESPONSIVO GERAL */
+
+/* Telas pequenas (telemóveis) */
+@media (max-width: 768px) {
+  .pagina-mapa {
+    padding: 20px;
+    margin-left: 0;
+  }
+
+  .mapa-header h2 {
+    font-size: 32px;
+  }
+
+  .mapa-wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .map-section,
+  .lista-locais-lateral {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    height: auto;
+  }
+
+  .map-section .mapa,
+  .mapa {
+    height: 400px;
+  }
+
+  .lista-itens.scrollável {
+    max-height: 300px;
+    margin-bottom: 60px;
+  }
+}
+
+/* Telas médias (entre tablets e portáteis) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .pagina-mapa {
+    padding: 60px 20px;
+    margin-left: 0;
+  }
+
+  .mapa-wrapper {
+    flex-direction: column;
+  }
+
+  .map-section,
+  .lista-locais-lateral {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 20px 0;
+    height: auto;
+  }
+
+  .map-section .mapa,
+  .mapa {
+    height: 450px;
+  }
+
+  .lista-itens.scrollável {
+    max-height: 300px;
+  }
+}
+
+/* Telas grandes (desktops maiores) */
+@media (min-width: 1200px) {
+  .pagina-mapa {
+    padding: 100px 40px;
+    margin-left: 250px;
+  }
+
+  .mapa-wrapper {
+    flex-direction: row;
+  }
+
+  .map-section {
+    flex: 2;
+  }
+
+  .lista-locais-lateral {
+    flex: 1;
+    max-width: 350px;
+    margin-left: 10px;
+    height: 550px;
+  }
+
+  .map-section .mapa,
+  .mapa {
+    height: 550px;
+  }
 }
