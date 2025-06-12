@@ -1,0 +1,129 @@
+/* Página geral */
+.pagina-mapa {
+  margin-left: 250px;
+  padding: 100px 40px;
+  background-color: #f1ecec;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Cabeçalho do título */
+.mapa-header {
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+.mapa-header h2 {
+  font-size: 50px;
+  color: #0033a0;
+}
+
+/* Linha decorativa opcional */
+.linha-azul {
+  height: 3px;
+  width: 120px;
+  background-color: #0033a0;
+  margin: 0 auto 20px;
+  border-radius: 5px;
+}
+
+/* Wrapper layout em duas colunas ou bloco único */
+.mapa-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Lado esquerdo: formulário */
+.form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #0033a0;
+}
+
+.form-section input,
+.form-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Botões centrais abaixo do formulário ou mapa */
+.botoes-centrados,
+.btn-coordenadas-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Botão de salvar */
+.botoes-centrados .btn-salvar,
+.btn-salvar {
+  background-color: #0033a0;
+  color: white;
+  padding: 12px 28px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Botão "Obter Coordenadas" */
+.btn-coordenadas {
+  background-color: #c8d2f3cf;
+  color: #333;
+  padding: 12px 30px;
+  min-width: 310px;
+  margin: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.btn-coordenadas:hover {
+  background-color: #0033a0;
+  color: white;
+}
+
+/* Lado direito: mapa */
+.map-section {
+  flex: 2;
+}
+
+.map-section .mapa,
+.mapa {
+  height: 550px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Mensagem de erro */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}

@@ -7,6 +7,7 @@ import Registo from './pages/Registo.jsx';
 import Home from './pages/Home.jsx';
 import Perfil from './pages/Perfil.jsx';
 import Mapa from './pages/Mapa';
+import LocaisEstudo from './pages/LocaisEstudo';
 import Resumos from './pages/Resumos.jsx';
 import UploadResumo from './pages/UploadResumo.jsx';
 import ResumoDetalhe from "./pages/ResumoDetalhe";
@@ -25,6 +26,7 @@ function App() {
   const location = useLocation();
   const path = location.pathname.toLowerCase();
 
+ 
   const isLoginPage = path === "/login" || path === "/registo"; // <-- ADICIONA ESTA LINHA
 
   return (
@@ -39,12 +41,11 @@ function App() {
         <Route path="/home" element={<Layout><Home /></Layout>} />
         <Route path="/perfil" element={<Layout><PrivateRoute><Perfil /></PrivateRoute></Layout>} />
         <Route path="/" element={<Layout><Home /></Layout>} />
-        <Route path='/resumos'element={<Layout><Resumos /></Layout>}></Route>
-        <Route path='/uploadresumo'element={<Layout><UploadResumo /></Layout>}></Route>
+        <Route path='/resumos' element={<Layout><Resumos /></Layout>} />
+        <Route path='/uploadresumo' element={<Layout><UploadResumo /></Layout>} />
         <Route path="/resumo/:id" element={<Layout><ResumoDetalhe /></Layout>} />
         <Route path="/mapa-teste" element={<MapaTeste />} />
         <Route path="/mapa" element={<Mapa />} />
-
       </Routes>
     </>
   );
