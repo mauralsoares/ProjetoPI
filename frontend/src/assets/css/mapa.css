@@ -303,6 +303,154 @@
 }
 
 
+/* Página de Resumos */
+.resumos-container {
+  margin-left: 250px;
+  padding: 100px 40px;
+  background-color: #f1ecec;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.resumos-container h1 {
+  font-size: 32px;
+  color: #0033a0;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.resumos-search {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px;
+  margin: 0 auto 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.resumos-dropdown {
+  width: 100%;
+  max-width: 500px;
+  margin: -10px auto 20px auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.resumos-dropdown-items {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.resumos-dropdown-items:hover {
+  background-color: #f1f5ff;
+}
+
+.resumo-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.resumo-card {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.resumo-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 51, 160, 0.1);
+}
+
+.resumo-card h3 {
+  font-size: 18px;
+  color: #0033a0;
+  margin-bottom: 10px;
+}
+
+.resumo-rating {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.resumo-desc {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 15px;
+}
+.resumo-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.resumo-btn,
+.resumo-btn-outline {
+  padding: 10px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+  min-width: 120px;
+}
+
+.resumo-btn {
+  background-color: #0033a0;
+  color: white;
+  border: none;
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resumo-btn:hover {
+  background-color: #00207a;
+}
+
+.resumo-btn-outline {
+  background-color: transparent;
+  border: 1px solid #0033a0;
+  color: #0033a0;
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resumo-btn-outline:hover {
+  background-color: #0033a0;
+  color: white;
+}
+
+.file-preview {
+  margin-top: 10px;
+}
+
 
 /* ========== RESPONSIVO GERAL ========== */
 
@@ -385,16 +533,129 @@
     font-size: 13px;
   }
 }
+/* RESPONSIVO GERAL */
 
-/* Telas médias (entre tablets e portáteis: 769px a 1199px) */
-@media (min-width: 769px) and (max-width: 1199px) {
-  .pagina-mapa {
-    padding: 60px 20px;
+/* Telas pequenas (até 768px) */
+@media (max-width: 768px) {
+  .pagina-mapa,
+  .resumos-container {
+    padding: 20px;
     margin-left: 0;
   }
 
-  .mapa-wrapper {
+  .mapa-header h2,
+  .resumos-container h1 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .mapa-wrapper,
+  .resumo-card-actions {
     flex-direction: column;
+    padding: 20px;
+  }
+
+  .welcome-box {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .map-section,
+  .lista-locais-lateral,
+  .resumo-btn,
+  .resumo-btn-outline {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .map-section .mapa,
+  .mapa {
+    height: 400px;
+  }
+
+  .lista-itens.scrollável {
+    max-height: 300px;
+    margin-bottom: 60px;
+  }
+
+  .class-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .class-card .time {
+    margin-bottom: 10px;
+  }
+
+  .class-card .arrow {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+
+  .resumo-card {
+    padding: 15px;
+  }
+
+  .resumo-card h3 {
+    font-size: 16px;
+  }
+
+  .resumo-btn {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .resumo-preview {
+    font-size: 13px;
+  }
+}
+
+/* Telas muito pequenas (< 480px) */
+@media (max-width: 480px) {
+  .welcome-box h2 {
+    font-size: 18px;
+  }
+
+  .class-card .time {
+    font-size: 14px;
+    padding: 8px 12px;
+    min-width: 60px;
+  }
+
+  .class-card .info strong,
+  .resumos-search {
+    font-size: 13px;
+  }
+
+  .class-card .room-change {
+    font-size: 13px;
+  }
+
+  .see-all {
+    font-size: 13px;
+  }
+
+  .resumos-dropdown-items {
+    padding: 8px 12px;
+  }
+
+  .resumos-container h1 {
+    font-size: 20px;
+  }
+}
+
+/* Telas médias (769px - 1199px) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .pagina-mapa,
+  .resumos-container {
+    padding: 60px 30px;
+    margin-left: 0;
+  }
+
+  .mapa-wrapper,
+  .resumo-list {
+    flex-direction: column;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
   .map-section,
@@ -415,9 +676,10 @@
   }
 }
 
-/* Telas grandes (desktops maiores a partir de 1200px) */
+/* Telas grandes (>= 1200px) */
 @media (min-width: 1200px) {
-  .pagina-mapa {
+  .pagina-mapa,
+  .resumos-container {
     padding: 100px 40px;
     margin-left: 250px;
   }
@@ -440,5 +702,9 @@
   .map-section .mapa,
   .mapa {
     height: 550px;
+  }
+
+  .resumo-list {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }
