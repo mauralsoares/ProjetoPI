@@ -11,6 +11,8 @@ import LocaisEstudo from './pages/LocaisEstudo';
 import Resumos from './pages/Resumos.jsx';
 import UploadResumo from './pages/UploadResumo.jsx';
 import ResumoDetalhe from "./pages/ResumoDetalhe";
+import MeusLocais from './pages/MeusLocais';
+
 
 import MapaTeste from './components/MapTest.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
@@ -42,6 +44,8 @@ function App() {
         <Route path="/mapa" element={<Layout><Mapa /></Layout>} />
         
         <Route path="/locaisestudo" element={<Layout><LocaisEstudo /></Layout>} />
+        <Route path="/meuslocais" element={<Layout><MeusLocais /></Layout>}/>
+
 
       </Routes>
     </>

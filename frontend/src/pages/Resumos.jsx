@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../assets/css/mapa.css";
+import "../assets/css/style_final.css";
 import axios from "axios";
 import ResumoCard from '../components/ResumoCard.jsx';
 
