@@ -236,87 +236,36 @@ const Perfil = () => {
               </div>
             </div>
 
-            {/* CLASSIFICAÇÕES */}
+            {/* CLASSIFICAÇÕES - Disponível brevemente */}
             <div className="rates-section section-box">
               <div className="section-header">
                 <h3>As tuas classificações ⭐</h3>
-                <button className="clear-btn" title="Apagar todas" disabled>🗑️</button>
               </div>
               <div className="section-content">
-                {Array.isArray(user.rates) && user.rates.length > 0 ? (
-                  user.rates.map((rate) => {
-                    const file = allFiles.find(f =>
-                      f.fileId?.toString() === rate.fileId?.toString() ||
-                      f._id?.toString() === rate.fileId?.toString()
-                    );
-                    return (
-                      <div key={rate.fileId} className="rate-item">
-                        <div>
-                          <strong>{file ? file.titulo : "Ficheiro não encontrado"}</strong>
-                          <div style={{ fontSize: "0.85em", color: "#444" }}>
-                            UC: {file?.uc || "Desconhecida"} | Curso: {file?.curso || "—"}
-                          </div>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                          <span style={{ color: "#f5b400", fontSize: 18 }}>⭐</span> {rate.nota}
-                          <button
-                            onClick={() => handleRemoverClassificacao(rate.fileId)}
-                            title="Remover classificação"
-                          >
-                            <img src="https://img.icons8.com/ios7/512/trash.png" alt="Remover" style={{ width: "20px", height: "20px" }} />
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <p className="placeholder">Ainda não classificaste nenhum resumo.</p>
-                )}
+                <div className="placeholder">Disponível brevemente</div>
               </div>
             </div>
           </div>
 
           {/* Segunda linha: locais + mapa */}
           <div className="row-section wide-row">
-            {/* LOCAIS */}
+            {/* LOCAIS - Disponível brevemente */}
             <div className="locais-section section-box">
               <div className="section-header">
                 <h3>Locais adicionados 📍</h3>
-                <button className="clear-btn" title="Apagar todos" disabled>🗑️</button>
               </div>
               <div className="section-content">
-                {Array.isArray(user.locais) && user.locais.length > 0 ? (
-                  user.locais.map((local, index) => (
-                    <div key={local._id || index} className="local-item">
-                      <div>
-                        <strong>{local.nome || "Local sem nome"}</strong>
-                        <div style={{ fontSize: "0.85em", color: "#444" }}>
-                          {local.descricao || "Sem descrição"}
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => handleApagarLocal(local._id)}
-                        title="Apagar local"
-                      >
-                        <img src="https://img.icons8.com/ios7/512/trash.png" alt="Remover" style={{ width: "20px", height: "20px" }} />
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <p className="placeholder">Ainda não adicionaste nenhum local de estudo.</p>
-                )}
+                <div className="placeholder">Disponível brevemente</div>
               </div>
             </div>
 
-            {/* MAPA */}
+            {/* MAPA - Disponível brevemente */}
             <div className="map-section section-box">
               <div className="section-header">
                 <h3>Mapa dos teus locais 🗺️</h3>
               </div>
               <div className="section-content">
-                <div className="map-placeholder">
-                  Mapa em construção...
-                </div>
+                <div className="placeholder">Disponível brevemente</div>
               </div>
             </div>
           </div>

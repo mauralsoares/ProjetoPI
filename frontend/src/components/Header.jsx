@@ -18,7 +18,8 @@ const Header = ({ onToggleSidebar }) => {
       .then(data => {
         if (data?.name) {
           const seed = encodeURIComponent(data.name);
-          setAvatarUrl(`https://api.dicebear.com/9.x/initials/svg?seed=${seed}`);
+          setAvatarUrl(`https://api.dicebear.com/7.x/initials
+            s/svg?seed=${seed}`);
         }
       })
       .catch(() => {
