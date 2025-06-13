@@ -1,11 +1,14 @@
 /* Página geral */
 .pagina-mapa {
   margin-left: 250px;
-  padding: 100px 40px;
+  padding: 40px; /* reset padrão */
+  padding-top: 110px; /* espaço para header (70px) + margem */
   background-color: #f1ecec;
   min-height: 100vh;
   box-sizing: border-box;
 }
+
+
 
 /* Cabeçalho do título */
 .mapa-header {
@@ -229,9 +232,11 @@
 /* Telas pequenas (telemóveis) */
 @media (max-width: 768px) {
   .pagina-mapa {
-    padding: 20px;
-    margin-left: 0;
-  }
+  padding: 20px;
+  padding-top: 100px; /* para header fixo */
+  margin-left: 0;
+}
+
 
   .mapa-header h2 {
     font-size: 32px;

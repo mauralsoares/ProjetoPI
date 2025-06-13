@@ -10,30 +10,54 @@
   align-items: center;
   background-color: #0D28C2;
   color: white;
-  padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  min-height: 70px;
-  max-height: 80px;
-  
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
-.logocontainer {
+
+/* Agrupa botão e logo */
+.leftSection {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
+/* Logo */
 .logo {
   height: 120px;
-  margin-right: 5px;
+  max-height: 120px;
+  object-fit: contain;
 }
 
-.title {
+/* Botão ☰ */
+.hamburger {
+  background: none;
+  border: none;
+  color: white;
   font-size: 24px;
-  font-weight: bold;
+  cursor: pointer;
+  display: none; /* escondido no desktop */
 }
 
+/* Ícone de perfil */
 .profileIcon img {
   height: 40px;
+  width: 40px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+/* Responsivo - mostrar botão, ajustar logo */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .logo {
+    height: 32px;
+  }
+
+  .header {
+    padding: 0 12px;
+  }
 }
