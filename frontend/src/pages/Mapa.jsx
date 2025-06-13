@@ -23,16 +23,14 @@ const localIcon = L.divIcon({
   popupAnchor: [0, -36],
 });
 
-// Componente para animar o mapa até o local clicado
+// Anima o mapa até um local
 const FlyToLocal = ({ position }) => {
   const map = useMap();
-
   useEffect(() => {
     if (position) {
       map.flyTo(position, 17, { duration: 1.5 });
     }
   }, [position]);
-
   return null;
 };
 
@@ -40,7 +38,9 @@ const Mapa = () => {
   const [locais, setLocais] = useState([]);
   const [posicaoAtual, setPosicaoAtual] = useState(null);
   const [localSelecionado, setLocalSelecionado] = useState(null);
+  const [termoBusca, setTermoBusca] = useState('');
 
+  // Obtém localização atual
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -52,18 +52,27 @@ const Mapa = () => {
         setPosicaoAtual([38.736946, -9.142685]);
       }
     );
+  }, []);
 
+  // Pesquisa locais (com debounce)
+  useEffect(() => {
     const fetchLocais = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/studyspots');
-        setLocais(res.data);
+        if (termoBusca.trim() === '') {
+          const res = await axios.get('http://localhost:4000/api/studyspots');
+          setLocais(res.data);
+        } else {
+          const res = await axios.get(`http://localhost:4000/api/studyspots/pesquisar?termo=${encodeURIComponent(termoBusca)}`);
+          setLocais(res.data);
+        }
       } catch (err) {
-        console.error('Erro ao buscar locais de estudo:', err);
+        console.error('Erro ao buscar locais:', err);
       }
     };
 
-    fetchLocais();
-  }, []);
+    const delay = setTimeout(fetchLocais, 400); // 400ms debounce
+    return () => clearTimeout(delay);
+  }, [termoBusca]);
 
   return (
     <div className="pagina-mapa">
@@ -73,7 +82,7 @@ const Mapa = () => {
       </div>
 
       <div className="upload-form mapa-wrapper">
-        {/* Mapa à esquerda */}
+        {/* Mapa */}
         <div className="map-section">
           {posicaoAtual && (
             <MapContainer
@@ -88,7 +97,6 @@ const Mapa = () => {
               />
 
               {localSelecionado && <FlyToLocal position={localSelecionado} />}
-
               <Marker position={posicaoAtual} icon={userIcon}>
                 <Popup>Você está aqui</Popup>
               </Marker>
@@ -96,14 +104,12 @@ const Mapa = () => {
               {locais.map((local, index) => {
                 const coords = local.localizacao?.coordinates;
                 if (!coords || coords.length !== 2) return null;
-
                 const [lng, lat] = coords;
                 return (
                   <Marker key={index} position={[lat, lng]} icon={localIcon}>
                     <Popup>
                       <strong>{local.nome || 'Sem nome'}</strong><br />
-                      {local.morada || 'Morada não disponível'}<br />
-                      
+                      {local.morada || 'Morada não disponível'}
                     </Popup>
                   </Marker>
                 );
@@ -112,33 +118,47 @@ const Mapa = () => {
           )}
         </div>
 
-        {/* Lista à direita */}
+        {/* Lista + busca */}
         <div className="lista-locais-lateral">
           <h3>Locais Registrados</h3>
 
+          <input
+            type="text"
+            placeholder="🔍 Procurar por nome, cidade ou morada..."
+            className="resumos-search"
+            value={termoBusca}
+            onChange={(e) => setTermoBusca(e.target.value)}
+            style={{ margin: '10px auto 20px', display: 'block', width: '90%' }}
+          />
+
           <ul className="lista-itens scrollável">
-            {locais.map((local, index) => {
-              const coords = local.localizacao?.coordinates;
-              return (
-                <li
-                  key={index}
-                  className="item-local"
-                  onClick={() => {
-                    if (coords && coords.length === 2) {
-                      const [lng, lat] = coords;
-                      setLocalSelecionado([lat, lng]);
-                    }
-                  }}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <strong>{local.nome || 'Sem nome'}</strong><br />
-                  <span>{local.morada || 'Morada não disponível'}</span>
-                  <hr className="separador" />
-                  <span className="descricao-local">{local.descricao || 'Sem descrição'}</span><br />
-                  
-                </li>
-              );
-            })}
+            {locais.length === 0 ? (
+              <p style={{ textAlign: 'center', fontStyle: 'italic' }}>
+                Nenhum local encontrado.
+              </p>
+            ) : (
+              locais.map((local, index) => {
+                const coords = local.localizacao?.coordinates;
+                return (
+                  <li
+                    key={index}
+                    className="item-local"
+                    onClick={() => {
+                      if (coords && coords.length === 2) {
+                        const [lng, lat] = coords;
+                        setLocalSelecionado([lat, lng]);
+                      }
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <strong>{local.nome || 'Sem nome'}</strong><br />
+                    <span>{local.morada || 'Morada não disponível'}</span>
+                    <hr className="separador" />
+                    <span className="descricao-local">{local.descricao || 'Sem descrição'}</span>
+                  </li>
+                );
+              })
+            )}
           </ul>
 
           <div className="btn-fixado-wrapper">
