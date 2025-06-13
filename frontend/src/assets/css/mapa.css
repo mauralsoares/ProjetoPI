@@ -224,9 +224,89 @@
   font-size: 14px;
 }
 
-/* RESPONSIVO GERAL */
 
-/* Telas pequenas (telemóveis) */
+/* Pagina Home*/
+.welcome-box {
+  background-color: #e6f0ff; /* azul clarinho suave */
+  border-left: 6px solid #0033a0;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.welcome-box h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0033a0;
+  margin-bottom: 8px;
+}
+
+.welcome-box p {
+  margin: 0;
+  color: #333;
+}
+
+
+.class-card {
+  display: flex;
+  align-items: center;
+  background-color: #f4f6ff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.class-card .time {
+  background-color: #dbe7ff;
+  font-weight: bold;
+  color: #0033a0;
+  font-size: 16px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-align: center;
+  min-width: 70px;
+}
+
+.class-card .info {
+  flex-grow: 1;
+  padding-left: 15px;
+}
+
+.class-card .info strong {
+  color: #000;
+}
+
+.class-card .room-change {
+  color: #d30000;
+  font-size: 14px;
+}
+
+.class-card .arrow {
+  font-size: 20px;
+  color: #0033a0;
+  margin-left: 10px;
+}
+
+.see-all {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #0033a0;
+  cursor: pointer;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.see-all:hover {
+  text-decoration: underline;
+}
+
+
+
+/* ========== RESPONSIVO GERAL ========== */
+
+/* Telas pequenas (telemóveis até 768px) */
 @media (max-width: 768px) {
   .pagina-mapa {
     padding: 20px;
@@ -234,12 +314,18 @@
   }
 
   .mapa-header h2 {
-    font-size: 32px;
+    font-size: 28px;
+    text-align: center;
   }
 
   .mapa-wrapper {
     flex-direction: column;
     padding: 20px;
+  }
+
+  .welcome-box {
+    padding: 16px;
+    font-size: 14px;
   }
 
   .map-section,
@@ -259,9 +345,48 @@
     max-height: 300px;
     margin-bottom: 60px;
   }
+
+  .class-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .class-card .time {
+    margin-bottom: 10px;
+  }
+
+  .class-card .arrow {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
 }
 
-/* Telas médias (entre tablets e portáteis) */
+/* Telas muito pequenas (ex: <480px) */
+@media (max-width: 480px) {
+  .welcome-box h2 {
+    font-size: 18px;
+  }
+
+  .class-card .time {
+    font-size: 14px;
+    padding: 8px 12px;
+    min-width: 60px;
+  }
+
+  .class-card .info strong {
+    font-size: 14px;
+  }
+
+  .class-card .room-change {
+    font-size: 13px;
+  }
+
+  .see-all {
+    font-size: 13px;
+  }
+}
+
+/* Telas médias (entre tablets e portáteis: 769px a 1199px) */
 @media (min-width: 769px) and (max-width: 1199px) {
   .pagina-mapa {
     padding: 60px 20px;
@@ -290,7 +415,7 @@
   }
 }
 
-/* Telas grandes (desktops maiores) */
+/* Telas grandes (desktops maiores a partir de 1200px) */
 @media (min-width: 1200px) {
   .pagina-mapa {
     padding: 100px 40px;
