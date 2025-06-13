@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import '../assets/css/Home.css'
 
+
+import React, { useEffect, useState } from 'react';
+import '../assets/css/mapa.css'; // Reutilizar o CSS base
 
 const Home = () => {
   const [userData, setUserData] = useState({
@@ -45,51 +46,55 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home-container">
-      <div className='welcome-box'>
-        <h2>Bem-vindo ao ISCTE</h2>
-        <p>Na página inicial podes ver as tuas próximas aulas, notificações, próximos eventos e ementas disponíveis.</p>
-        <p>Vai até ao mapa e começa a explorar o campus!</p>
+    <div className="pagina-mapa"> {/* Mantém fundo e padding do layout principal */}
+      <div className="mapa-wrapper" style={{ flexDirection: 'column', gap: '24px' }}>
+        {/* Caixa de boas-vindas */}
+        <div className="welcome-box">
+          <h2>Bem-vindo ao ISCTE</h2>
+          <p>
+            Na página inicial podes ver as tuas próximas aulas, notificações, próximos eventos e ementas disponíveis.
+          </p>
+          <p>Vai até ao mapa e começa a explorar o campus!</p>
+        </div>
+
+        {/* Secção de horário */}
+        <div className="horario">
+          <div className="schedule-header">
+            <h3>HORÁRIO</h3>
+            <div className="see-all">
+              <span>ver tudo</span>
+              <span className="see-all-arrow">{'>'}</span>
+            </div>
+          </div>
+
+          <div className="class-card">
+            <div className="time">09:30</div>
+            <div className="info">
+              <strong>Programação para Internet</strong>
+              <p className="room-change">Mudança de Sala: P1.02</p>
+            </div>
+            <div className="arrow">{'>'}</div>
+          </div>
+
+          <div className="class-card">
+            <div className="time">14:00</div>
+            <div className="info">
+              <strong>Bases de Dados</strong>
+              <p>Sala P3.03</p>
+            </div>
+            <div className="arrow">{'>'}</div>
+          </div>
+
+          <div className="class-card">
+            <div className="time">10:00</div>
+            <div className="info">
+              <strong>Estratégia Empresarial</strong>
+              <p>Sala E4.8</p>
+            </div>
+            <div className="arrow">{'>'}</div>
+          </div>
+        </div>
       </div>
-
-      <div className='horario'>
-        <div className='schedule-header'>
-          <h3>HORÁRIO</h3>
-          <div className="see-all">
-            <span>ver tudo</span>
-            <span className="see-all-arrow">{'>'}</span> {/* ADICIONADO */}
-          </div>
-        </div>
-
-        <div className="class-card">
-          <div className="time">09:30</div>
-          <div className="info">
-            <strong>Programação para Internet</strong>
-            <p className="room-change">Mudança de Sala: P1.02</p>
-          </div>
-          <div className="arrow">{'>'}</div>
-        </div>
-
-        <div className="class-card">
-          <div className="time">14:00</div>
-          <div className="info">
-            <strong>Bases de Dados</strong>
-            <p>Sala P3.03</p>
-          </div>
-          <div className="arrow">{'>'}</div>
-        </div>
-
-        <div className="class-card">
-          <div className="time">10:00</div>
-          <div className="info">
-            <strong>Estratégia Empresarial</strong>
-            <p>Sala E4.8</p>
-          </div>
-          <div className="arrow">{'>'}</div>
-        </div>
-
-      </div>
-
     </div>
   );
 };
