@@ -1,57 +1,78 @@
-// src/pages/Perfil.jsx
 import React, { useEffect, useState } from "react";
 import "../assets/css/Perfil.css";
 
 const Perfil = () => {
   const [user, setUser] = useState(null);
   const [erro, setErro] = useState(null);
+  const [userUploads, setUserUploads] = useState([]);
   const [allFiles, setAllFiles] = useState([]);
+  const [editNome, setEditNome] = useState(false);
+  const [novoNome, setNovoNome] = useState("");
+  const [loadingNome, setLoadingNome] = useState(false);
 
-  useEffect(() => {
-    fetch("/api/files")
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data.files)) {
-          setAllFiles(data.files);
-        }
-      })
-      .catch((err) => console.error("Erro Get ficheiros:", err));
-  }, []);
-
+  // Buscar perfil do utilizador autenticado
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       setErro("Token não encontrado. Por favor faça login.");
       return;
     }
-
     fetch("/api/auth/me", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` }
     })
-      .then((res) => {
-        if (!res.ok) throw new Error("Erro Get perfil");
+      .then(res => {
+        if (!res.ok) throw new Error("Erro ao buscar perfil");
         return res.json();
       })
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((err) => setErro(err.message));
+      .then(data => setUser(data))
+      .catch(err => setErro(err.message));
   }, []);
 
-  const tipoLabel =
-    user?.tipo === "admin"
-      ? "Administrador"
-      : user?.tipo === "user"
-      ? "Estudante"
-      : user?.tipo;
+  // Buscar todos os ficheiros (para cruzar com rates e uploads)
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    fetch("/api/files", {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data.files)) setAllFiles(data.files);
+      })
+      .catch(err => console.error("Erro ao buscar ficheiros:", err));
+  }, []);
 
-  const dataRegisto = user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : "Desconhecida";
-  const avatarSeed = encodeURIComponent(user?.name || "User");
-  const avatarUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${avatarSeed}`;
+  // Buscar uploads do utilizador autenticado (por email)
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (user?.email && token) {
+      fetch(`/api/files?email=${encodeURIComponent(user.email)}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data.files)) setUserUploads(data.files);
+        })
+        .catch(err => console.error("Erro ao buscar uploads:", err));
+    }
+  }, [user]);
 
+  // Apagar upload
+  const handleApagarUpload = async (fileId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`/api/uploads/${fileId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error("Erro ao apagar o ficheiro.");
+      setUserUploads(prev => prev.filter(f => f._id !== fileId));
+    } catch (err) {
+      alert("Não foi possível apagar o upload.");
+    }
+  };
+
+  // Remover classificação
   const handleRemoverClassificacao = async (fileId) => {
     const token = localStorage.getItem("token");
     try {
@@ -62,16 +83,74 @@ const Perfil = () => {
       if (!res.ok) throw new Error("Erro ao remover classificação");
       setUser(prev => ({
         ...prev,
-        rates: prev.rates.filter(r => r.id !== fileId)
+        rates: prev.rates.filter(r => r.fileId !== fileId)
       }));
     } catch (error) {
-      console.error("Erro:", error);
       alert("Não foi possível remover a classificação.");
     }
   };
 
+  // Apagar local de estudo
+  const handleApagarLocal = async (localId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`/api/studyspots/${localId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error("Erro ao apagar local.");
+      setUser(prev => ({
+        ...prev,
+        locais: prev.locais.filter(l => l._id !== localId)
+      }));
+    } catch (err) {
+      alert("Não foi possível apagar o local.");
+    }
+  };
+
+  // Atualizar nome do utilizador
+  const handleAtualizarNome = async () => {
+    if (!novoNome.trim()) return;
+    setLoadingNome(true);
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch("/api/auth/me", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ name: novoNome })
+      });
+      if (!res.ok) throw new Error("Erro ao atualizar nome");
+      const data = await res.json();
+      setUser(prev => ({ ...prev, name: data.name }));
+      setEditNome(false);
+    } catch (err) {
+      alert("Não foi possível atualizar o nome.");
+    }
+    setLoadingNome(false);
+  };
+
   if (erro) return <div className="error">{erro}</div>;
   if (!user) return <div className="perfil-wrapper">A carregar perfil...</div>;
+
+  const tipoLabel =
+    user.tipo === "admin"
+      ? "Administrador"
+      : user.tipo === "user"
+      ? "Estudante"
+      : user.tipo;
+
+  const dataRegisto = user.createdAt
+    ? new Date(user.createdAt).toLocaleDateString()
+    : "Desconhecida";
+  const avatarSeed = encodeURIComponent(user.name || "User");
+  const avatarUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${avatarSeed}`;
+
+  // Cruzamento para classificações
+  const getFileFromRate = (rate) =>
+    allFiles.find(f => f._id?.toString() === rate.fileId?.toString());
 
   return (
     <div className="perfil-wrapper">
@@ -81,7 +160,33 @@ const Perfil = () => {
 
         <div className="perfil-info-avatar">
           <div className="perfil-info">
-            <p><strong>Nome:</strong> {user.name}</p>
+            <p>
+              <strong>Nome:</strong>{" "}
+              {editNome ? (
+                <>
+                  <input
+                    type="text"
+                    value={novoNome}
+                    onChange={e => setNovoNome(e.target.value)}
+                    style={{ width: "120px" }}
+                    disabled={loadingNome}
+                  />
+                  <button onClick={handleAtualizarNome} disabled={loadingNome || !novoNome.trim()}>Guardar</button>
+                  <button onClick={() => setEditNome(false)} disabled={loadingNome}>Cancelar</button>
+                </>
+              ) : (
+                <span
+                  style={{ cursor: "pointer", textDecoration: "underline dotted" }}
+                  title="Clique para editar"
+                  onClick={() => {
+                    setNovoNome(user.name);
+                    setEditNome(true);
+                  }}
+                >
+                  {user.name}
+                </span>
+              )}
+            </p>
             <p><strong>Email:</strong> {user.email}</p>
             <p><strong>Conta:</strong> {tipoLabel}</p>
             <p><strong>Registado a:</strong> <span style={{ fontSize: '0.85em' }}>{dataRegisto}</span></p>
@@ -96,91 +201,122 @@ const Perfil = () => {
         <div className="sections-container">
           {/* Primeira linha: uploads + classificações */}
           <div className="row-section wide-row">
+            {/* UPLOADS */}
             <div className="uploads-section section-box">
               <div className="section-header">
                 <h3>Os teus uploads 📁</h3>
-                <button className="clear-btn" title="Apagar todos">🗑️</button>
+                <button className="clear-btn" title="Apagar todos" disabled>🗑️</button>
               </div>
-              {Array.isArray(allFiles) && allFiles.length > 0 ? (
-                allFiles.filter(file => file.owner === user.email).map((file, index) => (
-                  <div key={index} className="rate-item">
-                    <div>
-                      <strong>{file.titulo}</strong>
-                      <div style={{ fontSize: "0.85em", color: "#444" }}>
-                        UC: {file.uc || "Desconhecida"} | Curso: {file.curso || "—"}
-                      </div>
-                    </div>
-                    <div>
-                      <span>⭐ {file.media || "—"}</span>
-                      <button style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}>
-                        <img src="https://img.icons8.com/ios7/512/trash.png" alt="Remover" style={{ width: "20px", height: "20px" }} />
-                      </button>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="placeholder">Ainda não enviaste nenhum resumo.</p>
-              )}
-            </div>
-
-            <div className="rates-section section-box">
-              <div className="section-header">
-                <h3>As tuas classificações ⭐</h3>
-                <button className="clear-btn" title="Apagar todas">🗑️</button>
-              </div>
-              {Array.isArray(user.rates) && user.rates.length > 0 ? (
-                user.rates.map((rate, index) => {
-                  const file = allFiles.find(f => f.id === rate.id);
-                  return (
-                    <div key={index} className="rate-item">
+              <div className="section-content">
+                {userUploads.length > 0 ? (
+                  userUploads.map((file) => (
+                    <div key={file._id} className="upload-item">
                       <div>
-                        <strong>{file ? file.titulo : "Ficheiro não encontrado"}</strong>
+                        <strong>{file.titulo}</strong>
                         <div style={{ fontSize: "0.85em", color: "#444" }}>
-                          UC: {file?.uc || "Desconhecida"} | Curso: {file?.curso || "—"}
+                          UC: {file.uc || "Desconhecida"} | Curso: {file.curso || "—"}
                         </div>
                       </div>
-                      <div>
-                        <span>⭐ {rate.nota}</span>
-                        <button onClick={() => handleRemoverClassificacao(rate.id)} style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <span title="Classificação média">
+                          <span style={{ color: "#f5b400", fontSize: 18 }}>⭐</span> {file.rating !== undefined ? file.rating.toFixed(1) : "—"}
+                        </span>
+                        <button
+                          onClick={() => handleApagarUpload(file._id)}
+                          title="Apagar ficheiro"
+                        >
                           <img src="https://img.icons8.com/ios7/512/trash.png" alt="Remover" style={{ width: "20px", height: "20px" }} />
                         </button>
                       </div>
                     </div>
-                  );
-                })
-              ) : (
-                <p className="placeholder">Ainda não classificaste nenhum resumo.</p>
-              )}
+                  ))
+                ) : (
+                  <p className="placeholder">Ainda não enviaste nenhum resumo.</p>
+                )}
+              </div>
+            </div>
+
+            {/* CLASSIFICAÇÕES */}
+            <div className="rates-section section-box">
+              <div className="section-header">
+                <h3>As tuas classificações ⭐</h3>
+                <button className="clear-btn" title="Apagar todas" disabled>🗑️</button>
+              </div>
+              <div className="section-content">
+                {Array.isArray(user.rates) && user.rates.length > 0 ? (
+                  user.rates.map((rate) => {
+                    const file = allFiles.find(f =>
+                      f.fileId?.toString() === rate.fileId?.toString() ||
+                      f._id?.toString() === rate.fileId?.toString()
+                    );
+                    return (
+                      <div key={rate.fileId} className="rate-item">
+                        <div>
+                          <strong>{file ? file.titulo : "Ficheiro não encontrado"}</strong>
+                          <div style={{ fontSize: "0.85em", color: "#444" }}>
+                            UC: {file?.uc || "Desconhecida"} | Curso: {file?.curso || "—"}
+                          </div>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                          <span style={{ color: "#f5b400", fontSize: 18 }}>⭐</span> {rate.nota}
+                          <button
+                            onClick={() => handleRemoverClassificacao(rate.fileId)}
+                            title="Remover classificação"
+                          >
+                            <img src="https://img.icons8.com/ios7/512/trash.png" alt="Remover" style={{ width: "20px", height: "20px" }} />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <p className="placeholder">Ainda não classificaste nenhum resumo.</p>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Segunda linha: locais + mapa */}
           <div className="row-section wide-row">
+            {/* LOCAIS */}
             <div className="locais-section section-box">
               <div className="section-header">
                 <h3>Locais adicionados 📍</h3>
-                <button className="clear-btn" title="Apagar todos">🗑️</button>
+                <button className="clear-btn" title="Apagar todos" disabled>🗑️</button>
               </div>
-              {Array.isArray(user.locais) && user.locais.length > 0 ? (
-                user.locais.map((local, index) => (
-                  <div key={index} className="rate-item">
-                    <div>
-                      <strong>{local.nome || "Local sem nome"}</strong>
-                      <div style={{ fontSize: "0.85em", color: "#444" }}>
-                        {local.descricao || "Sem descrição"}
+              <div className="section-content">
+                {Array.isArray(user.locais) && user.locais.length > 0 ? (
+                  user.locais.map((local, index) => (
+                    <div key={local._id || index} className="local-item">
+                      <div>
+                        <strong>{local.nome || "Local sem nome"}</strong>
+                        <div style={{ fontSize: "0.85em", color: "#444" }}>
+                          {local.descricao || "Sem descrição"}
+                        </div>
                       </div>
+                      <button
+                        onClick={() => handleApagarLocal(local._id)}
+                        title="Apagar local"
+                      >
+                        <img src="https://img.icons8.com/ios7/512/trash.png" alt="Remover" style={{ width: "20px", height: "20px" }} />
+                      </button>
                     </div>
-                  </div>
-                ))
-              ) : (
-                <p className="placeholder">Ainda não adicionaste nenhum local de estudo.</p>
-              )}
+                  ))
+                ) : (
+                  <p className="placeholder">Ainda não adicionaste nenhum local de estudo.</p>
+                )}
+              </div>
             </div>
 
+            {/* MAPA */}
             <div className="map-section section-box">
-              <h3>Mapa dos teus locais 🗺️</h3>
-              <div className="map-placeholder">
-                Mapa em construção...
+              <div className="section-header">
+                <h3>Mapa dos teus locais 🗺️</h3>
+              </div>
+              <div className="section-content">
+                <div className="map-placeholder">
+                  Mapa em construção...
+                </div>
               </div>
             </div>
           </div>
