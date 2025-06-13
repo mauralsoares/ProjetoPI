@@ -156,12 +156,3 @@ function Register() {
 }
 
 export default Register;
-
-/*
-🧩 Componente: Register.jsx
-📂 Local: /src/pages/Register.jsx
-🎨 Estilo: /src/assets/css/Registo.css
-🔐 Utiliza JWT: Sim, com localStorage
-⚙️ Hooks: useState, useNavigate
-➡️ Submissão: POST para /api/auth/register
-*/
