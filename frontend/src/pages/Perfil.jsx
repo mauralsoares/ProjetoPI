@@ -5,7 +5,6 @@ const Perfil = () => {
   const [user, setUser] = useState(null);
   const [erro, setErro] = useState(null);
   const [userUploads, setUserUploads] = useState([]);
-  const [allFiles, setAllFiles] = useState([]);
   const [editNome, setEditNome] = useState(false);
   const [novoNome, setNovoNome] = useState("");
   const [loadingNome, setLoadingNome] = useState(false);
@@ -26,20 +25,6 @@ const Perfil = () => {
       })
       .then(data => setUser(data))
       .catch(err => setErro(err.message));
-  }, []);
-
-  // Buscar todos os ficheiros (para cruzar com rates e uploads)
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    fetch("/api/files", {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data.files)) setAllFiles(data.files);
-      })
-      .catch(err => console.error("Erro ao buscar ficheiros:", err));
   }, []);
 
   // Buscar uploads do utilizador autenticado (por email)
@@ -69,42 +54,6 @@ const Perfil = () => {
       setUserUploads(prev => prev.filter(f => f._id !== fileId));
     } catch (err) {
       alert("Não foi possível apagar o upload.");
-    }
-  };
-
-  // Remover classificação
-  const handleRemoverClassificacao = async (fileId) => {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await fetch(`/api/ratings/${fileId}/remover`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (!res.ok) throw new Error("Erro ao remover classificação");
-      setUser(prev => ({
-        ...prev,
-        rates: prev.rates.filter(r => r.fileId !== fileId)
-      }));
-    } catch (error) {
-      alert("Não foi possível remover a classificação.");
-    }
-  };
-
-  // Apagar local de estudo
-  const handleApagarLocal = async (localId) => {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await fetch(`/api/studyspots/${localId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (!res.ok) throw new Error("Erro ao apagar local.");
-      setUser(prev => ({
-        ...prev,
-        locais: prev.locais.filter(l => l._id !== localId)
-      }));
-    } catch (err) {
-      alert("Não foi possível apagar o local.");
     }
   };
 
@@ -147,10 +96,6 @@ const Perfil = () => {
     : "Desconhecida";
   const avatarSeed = encodeURIComponent(user.name || "User");
   const avatarUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${avatarSeed}`;
-
-  // Cruzamento para classificações
-  const getFileFromRate = (rate) =>
-    allFiles.find(f => f._id?.toString() === rate.fileId?.toString());
 
   return (
     <div className="perfil-wrapper">
@@ -199,9 +144,7 @@ const Perfil = () => {
 
       {user.tipo === "user" && (
         <div className="sections-container">
-          {/* Primeira linha: uploads + classificações */}
           <div className="row-section wide-row">
-            {/* UPLOADS */}
             <div className="uploads-section section-box">
               <div className="section-header">
                 <h3>Os teus uploads 📁</h3>
@@ -233,39 +176,6 @@ const Perfil = () => {
                 ) : (
                   <p className="placeholder">Ainda não enviaste nenhum resumo.</p>
                 )}
-              </div>
-            </div>
-
-            {/* CLASSIFICAÇÕES - Disponível brevemente */}
-            <div className="rates-section section-box">
-              <div className="section-header">
-                <h3>As tuas classificações ⭐</h3>
-              </div>
-              <div className="section-content">
-                <div className="placeholder">Disponível brevemente</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Segunda linha: locais + mapa */}
-          <div className="row-section wide-row">
-            {/* LOCAIS - Disponível brevemente */}
-            <div className="locais-section section-box">
-              <div className="section-header">
-                <h3>Locais adicionados 📍</h3>
-              </div>
-              <div className="section-content">
-                <div className="placeholder">Disponível brevemente</div>
-              </div>
-            </div>
-
-            {/* MAPA - Disponível brevemente */}
-            <div className="map-section section-box">
-              <div className="section-header">
-                <h3>Mapa dos teus locais 🗺️</h3>
-              </div>
-              <div className="section-content">
-                <div className="placeholder">Disponível brevemente</div>
               </div>
             </div>
           </div>
