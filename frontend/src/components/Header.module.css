@@ -38,3 +38,24 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.menuButton {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+/* Visível apenas no mobile */
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+  }
+
+  .logoArea {
+    flex: 1;
+    text-align: center;
+  }
+}
