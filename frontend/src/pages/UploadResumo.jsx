@@ -123,12 +123,12 @@ const UploadResumo = () => {
     <div className="upload-resumo-wrapper">
       <div className="upload-resumo-container">
         <div className="upload-resumo-header">
-          <h2>Upload de Resumo</h2>
+          <h2>Carregar Resumo</h2>
           <hr className="divider" />
         </div>
 
         <form className="upload-form" onSubmit={handleSubmit}>
-          <label>Nome do Resumo</label>
+          <label>Título do Resumo</label>
           <input
             type="text"
             name="nome"
@@ -137,11 +137,11 @@ const UploadResumo = () => {
             required
           />
 
-          <label>Nome da Cadeira</label>
+          <label>Unidade Curricular</label>
           <Select
             options={cadeiraOptions}
             onChange={(opt) => setFormData((prev) => ({ ...prev, cadeira: opt.value }))}
-            placeholder="Escolha uma cadeira..."
+            placeholder="Escolha uma unidade curricular..."
           />
 
           <label>Curso</label>
@@ -157,10 +157,10 @@ const UploadResumo = () => {
             value={formData.descricao}
             onChange={handleChange}
             rows="4"
-            placeholder="Descreve brevemente o conteúdo do resumo..."
+            placeholder="Descreva brevemente o conteúdo do resumo..."
           />
 
-          <label>Adicionar Ficheiro</label>
+          <label>Adicionar ficheiro</label>
           <input
             type="file"
             name="ficheiro"
@@ -172,7 +172,7 @@ const UploadResumo = () => {
           {successMessage && <p className="success">{successMessage}</p>}
 
           <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Enviando...' : 'Salvar'}
+            {isSubmitting ? 'A enviar...' : 'Guardar'}
           </button>
         </form>
       </div>

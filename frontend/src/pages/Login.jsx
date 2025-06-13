@@ -26,7 +26,7 @@ function Login() {
       const res = await fetch('/api/auth/login', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // Para enviar cookies, se necessário
+        credentials: "include", // Para enviar cookies, se necessário ()
         body: JSON.stringify({
           email,
           password,
