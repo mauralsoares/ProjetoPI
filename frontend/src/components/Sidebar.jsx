@@ -29,6 +29,7 @@ const Sidebar = ({ onClose }) => {
         <li><Link to="/resumos" className="sidebar-link" onClick={onClose}><FaFileAlt /> Resumos</Link></li>
         <li><Link to="/uploadresumo" className="sidebar-link" onClick={onClose}><FaUpload /> Upload de Resumos</Link></li>
         <li><Link to="/mapa" className="sidebar-link" onClick={onClose}><FaMapMarkerAlt /> Locais de Estudo</Link></li>
+        <li><Link to="/meuslocais" className="sidebar-link" onClick={onClose}><FaGraduationCap /> Meus Locais</Link></li>
         <li><FaGraduationCap />Curso</li>
         <li><FaCreditCard />Pagamentos</li>
       </ul>
