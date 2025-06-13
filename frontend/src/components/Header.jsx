@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import styles from './Header.module.css';
 
-const Header = () => {
+const Header = ({ onToggleSidebar }) => {
   const navigate = useNavigate();
   const [avatarUrl, setAvatarUrl] = useState("/imagens/profile-icon.png");
 
@@ -18,7 +18,7 @@ const Header = () => {
       .then(data => {
         if (data?.name) {
           const seed = encodeURIComponent(data.name);
-          setAvatarUrl(`https://api.dicebear.com/7.x/thumbs/svg?seed=${seed}`);
+          setAvatarUrl(`https://api.dicebear.com/9.x/initials/svg?seed=${seed}`);
         }
       })
       .catch(() => {
@@ -28,11 +28,19 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
+      {/* Botão menu só visível em mobile (usa CSS para esconder em desktop) */}
+      <button
+        className={styles.menuButton}
+        onClick={onToggleSidebar}
+        aria-label="Abrir menu"
+        title="Abrir menu"
+        type="button"
+      >
+        ☰
+      </button>
       <div className={styles.logoArea} onClick={() => navigate("/home")} title="Ir para a página inicial">
         <img src="/imagens/iscte_logo-header.png" alt="ISCTE Logo" className={styles.logo} />
       </div>
-
-      {/* A tooltip está agora diretamente no <img> */}
       <div className={styles.profileIcon} onClick={() => navigate("/perfil")}>
         <img
           src={avatarUrl}
