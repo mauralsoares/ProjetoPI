@@ -451,6 +451,24 @@
   margin-top: 10px;
 }
 
+.download-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Mensagem para incentivar a avaliação */
+.avaliar-msg {
+  font-size: 16px;
+  color: #0033a0;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.download-wrapper .download-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  min-width: auto;
+}
 
 /* ========== RESPONSIVO GERAL ========== */
 
