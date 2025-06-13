@@ -1,4 +1,4 @@
-/* Página geral */
+/* ===== Página Geral ===== */
 .pagina-mapa {
   margin-left: 250px;
   padding: 100px 40px;
@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-/* Cabeçalho do título */
+/* ===== Cabeçalho do Título ===== */
 .mapa-header {
   text-align: center;
   margin: 0 0 30px;
@@ -18,9 +18,7 @@
   color: #0033a0;
 }
 
-
-
-/* Wrapper layout em duas colunas ou bloco único */
+/* ===== Wrapper: Layout Principal ===== */
 .mapa-wrapper {
   display: flex;
   flex-direction: row;
@@ -34,7 +32,7 @@
   margin: 0 auto;
 }
 
-/* Lado esquerdo: formulário */
+/* ===== Formulário (Lado Esquerdo) ===== */
 .form-section {
   flex: 1;
   display: flex;
@@ -58,7 +56,7 @@
   box-sizing: border-box;
 }
 
-/* Botões centrais abaixo do formulário ou mapa */
+/* ===== Botões Abaixo do Formulário ===== */
 .botoes-centrados,
 .btn-coordenadas-wrapper {
   display: flex;
@@ -67,7 +65,6 @@
   margin-top: 20px;
 }
 
-/* Botão de salvar */
 .botoes-centrados .btn-salvar,
 .btn-salvar {
   background-color: #0033a0;
@@ -79,7 +76,6 @@
   cursor: pointer;
 }
 
-/* Botão "Obter Coordenadas" */
 .btn-coordenadas {
   background-color: #c8d2f3cf;
   color: #333;
@@ -100,7 +96,7 @@
   color: white;
 }
 
-/* Lado direito: mapa */
+/* ===== Mapa (Lado Direito) ===== */
 .map-section {
   flex: 2;
 }
@@ -113,7 +109,7 @@
   overflow: hidden;
 }
 
-/* Mensagem de erro */
+/* ===== Mensagem de Erro ===== */
 .error {
   color: red;
   font-size: 14px;
@@ -121,16 +117,20 @@
   text-align: center;
 }
 
-/* Ícones do mapa */
-.icon-usuario {
-  background-color: #0033a0;
-  border-radius: 50%;
+/* ===== Ícones do Mapa ===== */
+.icon-usuario,
+.icon-local {
   width: 36px;
   height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon-usuario {
+  background-color: #0033a0;
 }
 
 .icon-usuario span {
@@ -140,13 +140,6 @@
 
 .icon-local {
   background-color: #eeff00;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .icon-local span {
@@ -154,7 +147,7 @@
   font-size: 20px;
 }
 
-/* Lista de locais ao lado do mapa */
+/* ===== Lista de Locais ===== */
 .lista-locais-lateral {
   flex: 1;
   max-width: 350px;
@@ -176,19 +169,19 @@
   padding: 0 10px;
 }
 
+.lista-itens,
 .lista-itens.scrollável {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 16px;
-  margin: 0;
-  margin-bottom: 60px; /* espaço para botão */
-}
-.lista-itens {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
+.lista-itens.scrollável {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px;
+  margin-bottom: 60px;
+}
 
 .item-local {
   background: #f9f9f9;
@@ -200,7 +193,6 @@
   color: #333;
 }
 
-/* Botão fixo ao fundo da lista */
 .btn-fixado-wrapper {
   position: absolute;
   bottom: 0;
@@ -212,22 +204,21 @@
   text-align: center;
 }
 
-.separador {
-  border: none;
-  border-top: 1px solid #919191;
-  margin: 8px 0;
-}
-
 .descricao-local {
   font-style: italic;
   color: #333;
   font-size: 14px;
 }
 
+.separador {
+  border: none;
+  border-top: 1px solid #919191;
+  margin: 8px 0;
+}
 
-/* Pagina Home*/
+/* ===== Página Home ===== */
 .welcome-box {
-  background-color: #e6f0ff; /* azul clarinho suave */
+  background-color: #e6f0ff;
   border-left: 6px solid #0033a0;
   padding: 20px;
   border-radius: 8px;
@@ -246,7 +237,7 @@
   color: #333;
 }
 
-
+/* ===== Cartões de Aula ===== */
 .class-card {
   display: flex;
   align-items: center;
@@ -302,8 +293,7 @@
   text-decoration: underline;
 }
 
-
-/* Página de Resumos */
+/* ===== Página de Resumos ===== */
 .resumos-container {
   margin-left: 250px;
   padding: 100px 40px;
@@ -395,6 +385,7 @@
   color: #333;
   margin-bottom: 15px;
 }
+
 .resumo-card-actions {
   display: flex;
   justify-content: space-between;
@@ -456,7 +447,6 @@
   margin-top: 20px;
 }
 
-/* Mensagem para incentivar a avaliação */
 .avaliar-msg {
   font-size: 16px;
   color: #0033a0;
@@ -470,23 +460,28 @@
   min-width: auto;
 }
 
+
+
+
+
 /* ========== RESPONSIVO GERAL ========== */
 
-/* Telas pequenas (telemóveis até 768px) */
+/* ===== Telas pequenas (até 768px) ===== */
 @media (max-width: 768px) {
-  .pagina-mapa {
+  /* Página geral */
+  .pagina-mapa,
+  .resumos-container,
+  .upload-resumo-wrapper {
     padding: 20px;
     margin-left: 0;
   }
 
-  .mapa-header h2 {
+  /* Cabeçalhos */
+  .mapa-header h2,
+  .resumos-container h1,
+  .upload-resumo-header h2 {
     font-size: 28px;
     text-align: center;
-  }
-
-  .mapa-wrapper {
-    flex-direction: column;
-    padding: 20px;
   }
 
   .welcome-box {
@@ -494,12 +489,20 @@
     font-size: 14px;
   }
 
+  /* Layout principal */
+  .mapa-wrapper,
+  .resumo-card-actions {
+    flex-direction: column;
+    padding: 20px;
+  }
+
   .map-section,
-  .lista-locais-lateral {
+  .lista-locais-lateral,
+  .resumo-btn,
+  .resumo-btn-outline {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    height: auto;
   }
 
   .map-section .mapa,
@@ -512,6 +515,7 @@
     margin-bottom: 60px;
   }
 
+  /* Cartões de aula */
   .class-card {
     flex-direction: column;
     align-items: flex-start;
@@ -525,9 +529,52 @@
     align-self: flex-end;
     margin-top: 10px;
   }
+
+  /* Cartões de resumo */
+  .resumo-card {
+    padding: 15px;
+  }
+
+  .resumo-card h3 {
+    font-size: 16px;
+  }
+
+  .resumo-btn {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .resumo-preview {
+    font-size: 13px;
+  }
+
+  /* Formulário de upload */
+  .upload-form {
+    padding: 20px;
+    border-radius: 6px;
+  }
+
+  .upload-form label {
+    font-size: 14px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  .upload-form input,
+  .upload-form select,
+  .upload-form textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .upload-form button {
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+  }
 }
 
-/* Telas muito pequenas (ex: <480px) */
+/* ===== Telas muito pequenas (até 480px) ===== */
 @media (max-width: 480px) {
   .welcome-box h2 {
     font-size: 18px;
@@ -539,16 +586,101 @@
     min-width: 60px;
   }
 
-  .class-card .info strong {
-    font-size: 14px;
-  }
-
-  .class-card .room-change {
+  .class-card .info strong,
+  .resumos-search {
     font-size: 13px;
   }
 
+  .class-card .room-change,
   .see-all {
     font-size: 13px;
+  }
+
+  .resumos-dropdown-items {
+    padding: 8px 12px;
+  }
+
+  .resumos-container h1 {
+    font-size: 20px;
+  }
+
+  .upload-resumo-header h2 {
+    font-size: 26px;
+  }
+
+  .upload-form {
+    padding: 16px;
+  }
+
+  .upload-form button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+/* ===== Telas médias (769px - 1199px) ===== */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .pagina-mapa,
+  .resumos-container {
+    padding: 60px 30px;
+    margin-left: 0;
+  }
+
+  .mapa-wrapper,
+  .resumo-list {
+    flex-direction: column;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .map-section,
+  .lista-locais-lateral {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    height: auto;
+  }
+
+  .map-section .mapa,
+  .mapa {
+    height: 450px;
+  }
+
+  .lista-itens.scrollável {
+    max-height: 300px;
+  }
+}
+
+/* ===== Telas grandes (a partir de 1200px) ===== */
+@media (min-width: 1200px) {
+  .pagina-mapa,
+  .resumos-container,
+  .upload-resumo-wrapper {
+    padding: 100px 40px;
+    margin-left: 250px;
+  }
+
+  .mapa-wrapper {
+    flex-direction: row;
+  }
+
+  .map-section {
+    flex: 2;
+  }
+
+  .lista-locais-lateral {
+    flex: 1;
+    max-width: 350px;
+    margin-left: 10px;
+    height: 550px;
+  }
+
+  .map-section .mapa,
+  .mapa {
+    height: 550px;
+  }
+
+  .resumo-list {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }
 
@@ -702,181 +834,5 @@
   .upload-form button {
     font-size: 14px;
     padding: 8px;
-  }
-}
-
-/* RESPONSIVO GERAL */
-
-/* Telas pequenas (até 768px) */
-@media (max-width: 768px) {
-  .pagina-mapa,
-  .resumos-container {
-    padding: 20px;
-    margin-left: 0;
-  }
-
-  .mapa-header h2,
-  .resumos-container h1 {
-    font-size: 28px;
-    text-align: center;
-  }
-
-  .mapa-wrapper,
-  .resumo-card-actions {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .welcome-box {
-    padding: 16px;
-    font-size: 14px;
-  }
-
-  .map-section,
-  .lista-locais-lateral,
-  .resumo-btn,
-  .resumo-btn-outline {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .map-section .mapa,
-  .mapa {
-    height: 400px;
-  }
-
-  .lista-itens.scrollável {
-    max-height: 300px;
-    margin-bottom: 60px;
-  }
-
-  .class-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .class-card .time {
-    margin-bottom: 10px;
-  }
-
-  .class-card .arrow {
-    align-self: flex-end;
-    margin-top: 10px;
-  }
-
-  .resumo-card {
-    padding: 15px;
-  }
-
-  .resumo-card h3 {
-    font-size: 16px;
-  }
-
-  .resumo-btn {
-    font-size: 13px;
-    padding: 8px 16px;
-  }
-
-  .resumo-preview {
-    font-size: 13px;
-  }
-}
-
-/* Telas muito pequenas (< 480px) */
-@media (max-width: 480px) {
-  .welcome-box h2 {
-    font-size: 18px;
-  }
-
-  .class-card .time {
-    font-size: 14px;
-    padding: 8px 12px;
-    min-width: 60px;
-  }
-
-  .class-card .info strong,
-  .resumos-search {
-    font-size: 13px;
-  }
-
-  .class-card .room-change {
-    font-size: 13px;
-  }
-
-  .see-all {
-    font-size: 13px;
-  }
-
-  .resumos-dropdown-items {
-    padding: 8px 12px;
-  }
-
-  .resumos-container h1 {
-    font-size: 20px;
-  }
-}
-
-/* Telas médias (769px - 1199px) */
-@media (min-width: 769px) and (max-width: 1199px) {
-  .pagina-mapa,
-  .resumos-container {
-    padding: 60px 30px;
-    margin-left: 0;
-  }
-
-  .mapa-wrapper,
-  .resumo-list {
-    flex-direction: column;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
-  .map-section,
-  .lista-locais-lateral {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 0 20px 0;
-    height: auto;
-  }
-
-  .map-section .mapa,
-  .mapa {
-    height: 450px;
-  }
-
-  .lista-itens.scrollável {
-    max-height: 300px;
-  }
-}
-
-/* Telas grandes (>= 1200px) */
-@media (min-width: 1200px) {
-  .pagina-mapa,
-  .resumos-container {
-    padding: 100px 40px;
-    margin-left: 250px;
-  }
-
-  .mapa-wrapper {
-    flex-direction: row;
-  }
-
-  .map-section {
-    flex: 2;
-  }
-
-  .lista-locais-lateral {
-    flex: 1;
-    max-width: 350px;
-    margin-left: 10px;
-    height: 550px;
-  }
-
-  .map-section .mapa,
-  .mapa {
-    height: 550px;
-  }
-
-  .resumo-list {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }

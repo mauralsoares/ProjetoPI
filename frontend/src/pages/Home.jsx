@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import '../assets/css/mapa.css'; // Reutilizar o CSS base
+import '../assets/css/style_final.css'; // Reutilizar o CSS base
 
 const Home = () => {
   const [userData, setUserData] = useState({

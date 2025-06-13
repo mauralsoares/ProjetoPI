@@ -1,7 +1,7 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
-import "../assets/css/mapa.css";
+import "../assets/css/style_final.css";
 
 const SUPPORTED_PREVIEW = [".pdf", ".png", ".jpg", ".jpeg", ".gif", ".webp"];
 

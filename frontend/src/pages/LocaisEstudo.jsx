@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import axios from 'axios';
-import '../assets/css/mapa.css';
+import '../assets/css/style_final.css';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -17,7 +17,7 @@ const MapaAutoCenter = ({ position }) => {
 
   useEffect(() => {
     if (position) {
-      map.flyTo(position, 17); // Zoom aproximado
+      map.flyTo(position, 17);
     }
   }, [position]);
 
@@ -36,6 +36,7 @@ const Mapa = () => {
     longitude: ''
   });
   const [erro, setErro] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [novoMarker, setNovoMarker] = useState(null);
 
   useEffect(() => {
@@ -108,6 +109,9 @@ const Mapa = () => {
 
       const res = await axios.get('http://localhost:4000/api/studyspots');
       setLocais(res.data);
+
+      setSuccessMessage('Local salvo com sucesso!');
+      setTimeout(() => setSuccessMessage(''), 4000);
     } catch (err) {
       setErro('Erro ao salvar local.');
     }
@@ -158,20 +162,12 @@ const Mapa = () => {
             </button>
           </div>
 
+          <input type="text" placeholder="Latitude" value={formData.latitude} readOnly />
+          <input type="text" placeholder="Longitude" value={formData.longitude} readOnly />
 
-          <input
-            type="text"
-            placeholder="Latitude"
-            value={formData.latitude}
-            readOnly
-          />
-          <input
-            type="text"
-            placeholder="Longitude"
-            value={formData.longitude}
-            readOnly
-          />
           {erro && <p className="error">{erro}</p>}
+          {successMessage && <p className="success">{successMessage}</p>}
+
           <div className="botoes-centrados">
             <button className="btn-salvar" onClick={handleSubmit}>Salvar</button>
           </div>

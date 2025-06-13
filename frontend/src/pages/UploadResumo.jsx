@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
-import '../assets/css/UploadResumo.css';
+import '../assets/css/style_final.css';
 
 const UploadResumo = () => {
   const [formData, setFormData] = useState({

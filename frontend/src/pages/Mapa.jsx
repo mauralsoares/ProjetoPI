@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import axios from 'axios';
-import '../assets/css/mapa.css';
+import '../assets/css/style_final.css';
 
 // Ícone do usuário
 const userIcon = L.divIcon({

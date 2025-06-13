@@ -95,3 +95,57 @@
   background-color: #f1f4ffcf !important;
   color: black;
 }
+
+/* ========== RESPONSIVO GERAL ========== */
+
+/* Telas pequenas (até 768px) */
+@media (max-width: 768px) {
+  .upload-resumo-wrapper {
+    margin-left: 0;
+    padding: 60px 20px 100px;
+  }
+
+  .upload-resumo-header h2 {
+    font-size: 32px;
+  }
+
+  .upload-form {
+    padding: 20px;
+    border-radius: 6px;
+  }
+
+  .upload-form label {
+    font-size: 14px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  .upload-form input,
+  .upload-form select,
+  .upload-form textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .upload-form button {
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+  }
+}
+
+/* Telas muito pequenas (até 480px) */
+@media (max-width: 480px) {
+  .upload-resumo-header h2 {
+    font-size: 26px;
+  }
+
+  .upload-form {
+    padding: 16px;
+  }
+
+  .upload-form button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
