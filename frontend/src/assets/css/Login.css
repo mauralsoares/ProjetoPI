@@ -1,124 +1,199 @@
+/* Geral */
 .login-container {
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
   background-image: url("https://fenix-mais.iscte-iul.pt/portalImage?resourceId=568499051167746");
   background-size: cover;
   background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
 }
 
 .login-card {
-  background: rgba(255, 255, 255, 0.96);
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   max-width: 400px;
-  width: 90%;
+  width: 100%;
   text-align: center;
 }
 
-.login-card h1 {
-  margin-bottom: 10px;
-  font-size: 28px;
-  color: #003366;
+.logo {
+  width: 100px;
+  margin-bottom: 15px;
 }
 
-.login-card h2 {
-  margin-bottom: 30px;
-  font-size: 20px;
+h1 {
+  font-size: 24px;
+  color: #0033a0 !important;
+  margin-bottom: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+
+.login-subtitle {
+  font-size: 15px;
   color: #444;
+  margin-top: -4px;
+  margin-bottom: 30px;
+  font-weight: 500;
 }
 
-.login-card form {
+
+
+
+/* Formulário */
+form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
-.login-card input {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  width: 100%;
+.form-group {
+  text-align: left;
 }
 
-.password-wrapper {
+label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Campos com ícones */
+.input-with-icon {
   position: relative;
-  width: 100%;
-  align-items: center;
-
 }
 
-.password-input {
-  padding: 10px 40px 10px 10px;
-  border-radius: 6px;
+.input-with-icon input {
+  width: 100%;
+  padding: 10px 40px 10px 12px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.input-icon,
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #666;
 }
 
 .toggle-password {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
+  background: none;
+  border: none;
   cursor: pointer;
-  font-size: 20px;
-  color: #ccc;
-  user-select: none;
-  background: transparent;
   padding: 0;
-  margin: 0;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-  z-index: 10;
 }
 
-.toggle-password img {
-  width: 20px;
-  height: 20px;
-  opacity: 0.7;
+.toggle-password:hover,
+.input-icon:hover {
+  color: #0033a0;
 }
 
-.toggle-password img:hover {
-  opacity: 1;
-}
-
-.login-card button[type="submit"] {
-  padding: 10px;
-  background-color: #003366;
+/* Botão */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #0033a0;
   color: white;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.login-card button[type="submit"]:hover {
-  background-color: #0055aa;
+button[type="submit"]:hover {
+  background-color: #00207a;
 }
 
+/* Mensagens */
 .error {
   color: red;
   font-size: 14px;
-  margin-top: -5px;
+  text-align: center;
+  margin-top: -10px;
 }
 
 .success {
-  color: green;
+  color: #2e7d32;
   font-size: 14px;
-  margin-top: -5px;
+  text-align: center;
+  margin-top: -10px;
 }
 
-.register-link {
+/* Link para registo */
+.registo-link {
   margin-top: 20px;
   font-size: 14px;
+  text-align: center;
 }
 
-.logo{
-  width: 120px;
-  margin-bottom: 20px;
+.registo-link a {
+  color: #0033a0;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.registo-link a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==== RESPONSIVO ==== */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 30px 15px;
+  }
+
+  .login-card {
+    padding: 30px 20px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .login-subtitle {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 25px 15px;
+    border-radius: 6px;
+  }
+
+  .input-with-icon input {
+    padding: 10px 36px 10px 10px;
+    font-size: 14px;
+  }
+
+  .toggle-password,
+  .input-icon {
+    font-size: 16px;
+  }
+
+  button[type="submit"] {
+    font-size: 15px;
+    padding: 10px;
+  }
 }
