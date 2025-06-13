@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../assets/css/Resumos.css";
+import "../assets/css/mapa.css";
 import axios from "axios";
 import ResumoCard from '../components/ResumoCard.jsx';
 
@@ -121,7 +121,10 @@ const Resumos = () => {
 
     return(
         <div className="resumos-container">
-            <h1>Fórum de Resumos</h1>
+            <div className="upload-resumo-header">
+          <h2>Fórum de Resumos</h2>
+          <hr className="divider" />
+        </div>
             <input
                 ref={inputRef}
                 type="text"
