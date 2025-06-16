@@ -27,7 +27,7 @@ const ResumoCard = ({ resumo }) => {
         className="resumo-card-link"
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <h3>{resumo.titulo || "Sem título"}</h3>
+        <h3 className="resumo-card-title">{resumo.titulo || "Sem título"}</h3>
         <div className="resumo-rating">
           ⭐ {resumo.rating?.toFixed(1) || "0.0"} ({resumo.ratingCount || 0})
         </div>
